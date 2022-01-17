@@ -1,0 +1,58 @@
+{
+  "name": "glhd/laravel-package-template",
+  "description": "",
+  "keywords": [
+    "laravel"
+  ],
+  "authors": [
+    {
+      "name": "Chris Morrell",
+      "homepage": "http://www.cmorrell.com"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "illuminate/support": "^8.0",
+    "ext-json": "*",
+    "mockery/mockery": "^1.3"
+  },
+  "require-dev": {
+    "orchestra/testbench": ">=6.21.1",
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "mockery/mockery": "^1.3.2",
+    "brainmaestro/composer-git-hooks": "^2.8",
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Glhd\\LaravelPackageTemplate\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/TestCase.php"
+    ],
+    "psr-4": {
+      "Glhd\\LaravelPackageTemplate\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "scripts": {
+    "post-autoload-dump": [
+      "[ -d .git ] && vendor/bin/cghooks update || echo 'No git repository to update hooks'"
+    ]
+  },
+  "hooks": {
+    "pre-commit": "[ -f vendor/bin/php-cs-fixer ] && ./bin/pre-commit.sh"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Glhd\\LaravelPackageTemplate\\Support\\PackageServiceProvider"
+      ],
+      "aliases": {
+        "Gretel": "Glhd\\LaravelPackageTemplate\\Support\\Facades\\Package"
+      }
+    }
+  }
+}

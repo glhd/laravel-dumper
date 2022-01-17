@@ -1,0 +1,60 @@
+name: PHPUnit
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  php-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: [ 8.0, 7.4 ]
+        laravel: [ ^8.12 ]
+        dependency-version: [ stable, lowest ]
+
+    name: "${{ matrix.php }} / ${{ matrix.laravel }} (${{ matrix.dependency-version }})"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, bcmath, intl, iconv
+          tools: composer:v2
+
+      - name: Register composer cache directory
+        id: composer-cache-files-dir
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+            ${{ steps.composer-cache-files-dir.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Set minimum stability
+        run: composer config minimum-stability ${{ matrix.minimum-stability }}
+
+      - name: Install dependencies
+        env:
+          COMPOSER_DISCARD_CHANGES: true
+        run: composer require --no-suggest --no-progress --no-interaction --prefer-dist --update-with-all-dependencies "laravel/framework:${{ matrix.laravel }}"
+
+      - name: Set dependency version
+        env:
+          COMPOSER_DISCARD_CHANGES: true
+        run: composer update --no-suggest --no-progress --no-interaction --no-suggest --prefer-dist --with-all-dependencies --prefer-${{ matrix.dependency-version }}
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
