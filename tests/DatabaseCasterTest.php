@@ -17,8 +17,8 @@ class DatabaseCasterTest extends TestCase
 	{
 		Date::setTestNow($now = now());
 		
-		$company = Company::create(['id' => 1, 'name' => 'Galahad']);
-		$user = User::create(['id' => 1, 'name' => 'John', 'email' => 'foo@bar.com', 'company_id' => 1]);
+		$company = Company::create(['name' => 'Galahad']);
+		$user = User::create(['name' => 'John', 'email' => 'foo@bar.com', 'company_id' => $company->id]);
 		$user->setRelation('company', $company);
 		$user->name = 'Chris';
 		
@@ -26,8 +26,8 @@ class DatabaseCasterTest extends TestCase
 		
 		$expected = <<<EOD
 		Glhd\LaravelDumper\Tests\User {
-		  +"id": 1
-		  +"company_id": 1
+		  +"id": %d
+		  +"company_id": %d
 		  +"email": "foo@bar.com"
 		  +"name": "Chris"
 		  +"created_at": "{$timestamp}"
@@ -37,7 +37,7 @@ class DatabaseCasterTest extends TestCase
 		  +wasRecentlyCreated: true
 		  #relations: array:1 [
 		    "company" => Glhd\LaravelDumper\Tests\Company {
-		      +"id": 1
+		      +"id": %d
 		      +"name": "Galahad"
 		      +"created_at": "{$timestamp}"
 		      +"updated_at": "{$timestamp}"
@@ -45,25 +45,25 @@ class DatabaseCasterTest extends TestCase
 		      +exists: true
 		      +wasRecentlyCreated: true
 		      #relations: []
-		       …27
+		       …%d
 		    }
 		  ]
 		  #connection: "testing"
 		  #table: "users"
 		  #original: array:6 [
-		    "id" => 1
 		    "name" => "John"
 		    "email" => "foo@bar.com"
-		    "company_id" => 1
+		    "company_id" => %d
 		    "updated_at" => "{$timestamp}"
 		    "created_at" => "{$timestamp}"
+		    "id" => %d
 		  ]
 		  #changes: []
-		   …23
+		   …%d
 		}
 		EOD;
 		
-		$this->assertDumpEquals($expected, $user);
+		$this->assertDumpMatchesFormat($expected, $user);
 	}
 	
 	public function test_it_dumps_basic_query_builders(): void
@@ -79,13 +79,13 @@ class DatabaseCasterTest extends TestCase
 		    name: "testing"
 		    database: ":memory:"
 		    driver: "sqlite"
-		     …22
+		     …%d
 		  }
-		   …21
+		   …%d
 		}
 		EOD;
 
-		$this->assertDumpEquals($expected, $builder);
+		$this->assertDumpMatchesFormat($expected, $builder);
 	}
 	
 	public function test_it_dumps_eloquent_query_builders(): void
@@ -102,21 +102,21 @@ class DatabaseCasterTest extends TestCase
 		    name: "testing"
 		    database: ":memory:"
 		    driver: "sqlite"
-		     …22
+		     …%d
 		  }
 		  #model: Glhd\LaravelDumper\Tests\User { …}
 		  #eagerLoad: array:1 [
 		    "company" => Closure() {
 		      class: "Illuminate\Database\Eloquent\Builder"
-		      file: "./vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php"
-		      line: "1364 to 1366"
+		      file: "%s"
+		      line: "%d to %d"
 		    }
 		  ]
-		   …5
+		   …%d
 		}
 		EOD;
 		
-		$this->assertDumpEquals($expected, $builder);
+		$this->assertDumpMatchesFormat($expected, $builder);
 	}
 	
 	public function test_it_dumps_eloquent_relations(): void
@@ -131,15 +131,15 @@ class DatabaseCasterTest extends TestCase
 		    name: "testing"
 		    database: ":memory:"
 		    driver: "sqlite"
-		     …22
+		     …%d
 		  }
 		  #parent: Glhd\LaravelDumper\Tests\User { …}
 		  #related: Glhd\LaravelDumper\Tests\Company { …}
-		   …4
+		   …%d
 		}
 		EOD;
 		
-		$this->assertDumpEquals($expected, $user->company());
+		$this->assertDumpMatchesFormat($expected, $user->company());
 	}
 	
 	protected function defineDatabaseMigrations()

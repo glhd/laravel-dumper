@@ -13,34 +13,31 @@ class CasterTest extends TestCase
 	public function test_it_casts_carbon_instances(): void
 	{
 		$now = Carbon::parse('2022-01-18 19:44:02.572622', 'America/New_York');
-		$id = spl_object_hash($now);
 		
 		$expected = <<<EOD
-		Carbon\Carbon @1642553042 {
+		Carbon\Carbon @%d {
 		  date: 2022-01-18 19:44:02.572622 America/New_York (-05:00)
 		  #endOfTime: false
 		  #startOfTime: false
-		  #constructedObjectId: "{$id}"
+		  #constructedObjectId: "%s"
 		  #dumpProperties: array:3 [
 		    0 => "date"
 		    1 => "timezone_type"
 		    2 => "timezone"
 		  ]
-		   …23
+		   …%d
 		}
 		EOD;
 		
-		$this->assertDumpEquals($expected, $now);
+		$this->assertDumpMatchesFormat($expected, $now);
 	}
 	
 	public function test_it_cuts_most_internals_from_a_container(): void
 	{
 		$container = new Container();
 		
-		$bind_line = __LINE__ + 1;
 		$container->bind(static::class, fn() => $this);
 		$container->alias(static::class, 'bar');
-		$extend_line = __LINE__ + 1;
 		$container->extend('bar', fn() => $this);
 		$container->make('bar');
 		
@@ -53,8 +50,8 @@ class CasterTest extends TestCase
 		      "concrete" => Closure() {
 		        class: "{$fqcn}"
 		        this: {$fqcn} {#1 …}
-		        file: "./tests/CasterTest.php"
-		        line: "{$bind_line} to {$bind_line}"
+		        file: "%s"
+		        line: "%d to %d"
 		      }
 		      "shared" => false
 		    ]
@@ -70,16 +67,16 @@ class CasterTest extends TestCase
 		      0 => Closure() {
 		        class: "{$fqcn}"
 		        this: Glhd\LaravelDumper\Tests\CasterTest {#1 …}
-		        file: "./tests/CasterTest.php"
-		        line: "{$extend_line} to {$extend_line}"
+		        file: "%s"
+		        line: "%d to %d"
 		      }
 		    ]
 		  ]
-		   …15
+		   …%d
 		}
 		EOD;
 		
-		$this->assertDumpEquals($expected, $container);
+		$this->assertDumpMatchesFormat($expected, $container);
 	}
 	
 	public function test_it_cuts_all_internals_from_a_nested_container(): void
@@ -88,10 +85,10 @@ class CasterTest extends TestCase
 		
 		$expected = <<<EOD
 		array:1 [
-		  0 => Illuminate\Container\Container { …19}
+		  0 => Illuminate\Container\Container { …%d}
 		]
 		EOD;
 		
-		$this->assertDumpEquals($expected, [$container]);
+		$this->assertDumpMatchesFormat($expected, [$container]);
 	}
 }
