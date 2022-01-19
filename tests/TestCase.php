@@ -1,9 +1,8 @@
 <?php
 
-namespace Galahad\LaravelPackageTemplate\Tests;
+namespace Glhd\LaravelDumper\Tests;
 
-use Galahad\LaravelPackageTemplate\Support\PackageServiceProvider;
-use Illuminate\Container\Container;
+use Glhd\LaravelDumper\LaravelDumperServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
@@ -11,7 +10,7 @@ abstract class TestCase extends Orchestra
 	protected function getPackageProviders($app)
 	{
 		return [
-			PackageServiceProvider::class,
+			LaravelDumperServiceProvider::class,
 		];
 	}
 	

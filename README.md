@@ -1,25 +1,25 @@
 <div style="float: right;">
-	<a href="https://github.com/glhd/laravel-package-template/actions" target="_blank">
+	<a href="https://github.com/glhd/laravel-dumper/actions" target="_blank">
 		<img 
-			src="https://github.com/glhd/laravel-package-template/workflows/PHPUnit/badge.svg" 
+			src="https://github.com/glhd/laravel-dumper/workflows/PHPUnit/badge.svg" 
 			alt="Build Status" 
 		/>
 	</a>
-	<a href="https://codeclimate.com/github/glhd/laravel-package-template/test_coverage" target="_blank">
+	<a href="https://codeclimate.com/github/glhd/laravel-dumper/test_coverage" target="_blank">
 		<img 
 			src="https://api.codeclimate.com/v1/badges/f597a6e8d9f968a55f03/test_coverage" 
 			alt="Coverage Status" 
 		/>
 	</a>
-	<a href="https://packagist.org/packages/glhd/laravel-package-template" target="_blank">
+	<a href="https://packagist.org/packages/glhd/laravel-dumper" target="_blank">
         <img 
-            src="https://poser.pugx.org/glhd/laravel-package-template/v/stable" 
+            src="https://poser.pugx.org/glhd/laravel-dumper/v/stable" 
             alt="Latest Stable Release" 
         />
 	</a>
 	<a href="./LICENSE" target="_blank">
         <img 
-            src="https://poser.pugx.org/glhd/laravel-package-template/license" 
+            src="https://poser.pugx.org/glhd/laravel-dumper/license" 
             alt="MIT Licensed" 
         />
     </a>
@@ -31,11 +31,25 @@
     </a>
 </div>
 
-# laravel-package-template
+# Laravel Dumper
 
-Please replace `glhd/laravel-package-template` with the package name in this file, 
-the change log, and the `composer.json` file before continuing.
+Improve the default output of `dump()` and `dd()` in Laravel projects. Improves the default
+dump behavior for many core Laravel objects, including:
+
+- Models
+- Query Builders
+- Service Container
+- Database Connections
+- Carbon Instances
 
 ## Installation
 
+Install as a dev dependency:
+
+```shell
+# composer require glhd/laravel-dumper --dev
+```
+
 ## Usage
+
+Just use `dd()` as you would normally, and enjoy the newly curated output!
