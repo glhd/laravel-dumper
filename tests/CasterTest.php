@@ -5,6 +5,7 @@ namespace Glhd\LaravelDumper\Tests;
 use Carbon\Carbon;
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
 class CasterTest extends TestCase
@@ -143,5 +144,28 @@ class CasterTest extends TestCase
 		EOD;
 		
 		$this->assertDumpMatchesFormat($expected, $request);
+	}
+	
+	public function test_it_dumps_a_response(): void
+	{
+		$response = new Response('Hello world.');
+		
+		$expected = <<<EOD
+		Illuminate\Http\Response {
+		  +headers: Symfony\Component\HttpFoundation\ResponseHeaderBag {
+		    cache-control: "%s"
+		    date: "%s"
+		    #cacheControl: []
+		  }
+		  #content: "Hello world."
+		  #version: "%d.%d"
+		  #statusCode: 200
+		  #statusText: "OK"
+		  +original: "Hello world."
+		   …%d
+		}
+		EOD;
+		
+		$this->assertDumpMatchesFormat($expected, $response);
 	}
 }
