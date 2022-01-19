@@ -6,7 +6,10 @@ use Glhd\LaravelDumper\Casters\BuilderCaster;
 use Glhd\LaravelDumper\Casters\CarbonCaster;
 use Glhd\LaravelDumper\Casters\ContainerCaster;
 use Glhd\LaravelDumper\Casters\DatabaseConnectionCaster;
+use Glhd\LaravelDumper\Casters\HeaderBagCaster;
 use Glhd\LaravelDumper\Casters\ModelCaster;
+use Glhd\LaravelDumper\Casters\ParameterBagCaster;
+use Glhd\LaravelDumper\Casters\RequestCaster;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelDumperServiceProvider extends ServiceProvider
@@ -17,6 +20,9 @@ class LaravelDumperServiceProvider extends ServiceProvider
 		BuilderCaster::class,
 		DatabaseConnectionCaster::class,
 		CarbonCaster::class,
+		RequestCaster::class,
+		ParameterBagCaster::class,
+		HeaderBagCaster::class,
 	];
 	
 	protected string $base_dir;

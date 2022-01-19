@@ -4,6 +4,7 @@ namespace Glhd\LaravelDumper\Tests;
 
 use Carbon\Carbon;
 use Illuminate\Container\Container;
+use Illuminate\Http\Request;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
 class CasterTest extends TestCase
@@ -90,5 +91,57 @@ class CasterTest extends TestCase
 		EOD;
 		
 		$this->assertDumpMatchesFormat($expected, [$container]);
+	}
+	
+	public function test_it_dumps_a_request(): void
+	{
+		$request = Request::create('/1');
+		
+		$expected = <<<EOD
+		Illuminate\Http\Request {
+		  +attributes: Symfony\Component\HttpFoundation\ParameterBag {}
+		  +request: Symfony\Component\HttpFoundation\InputBag {}
+		  +query: Symfony\Component\HttpFoundation\InputBag {}
+		  +server: Symfony\Component\HttpFoundation\ServerBag {
+		    SERVER_NAME: "localhost"
+		    SERVER_PORT: 80
+		    HTTP_HOST: "localhost"
+		    HTTP_USER_AGENT: "Symfony"
+		    HTTP_ACCEPT: "%s"
+		    HTTP_ACCEPT_LANGUAGE: "%s"
+		    HTTP_ACCEPT_CHARSET: "%s"
+		    REMOTE_ADDR: "%s"
+		    SCRIPT_NAME: ""
+		    SCRIPT_FILENAME: ""
+		    SERVER_PROTOCOL: "HTTP/1.1"
+		    REQUEST_TIME: %d
+		    REQUEST_TIME_FLOAT: %d.%d
+		    PATH_INFO: ""
+		    REQUEST_METHOD: "GET"
+		    REQUEST_URI: "/1"
+		    QUERY_STRING: ""
+		  }
+		  +files: Symfony\Component\HttpFoundation\FileBag {}
+		  +cookies: Symfony\Component\HttpFoundation\InputBag {}
+		  +headers: Symfony\Component\HttpFoundation\HeaderBag {
+		    host: "localhost"
+		    user-agent: "Symfony"
+		    accept: "%s"
+		    accept-language: "%s"
+		    accept-charset: "%s"
+		    #cacheControl: []
+		  }
+		  #defaultLocale: "en"
+		  -isHostValid: true
+		  -isForwardedValid: true
+		  pathInfo: "/1"
+		  requestUri: "/1"
+		  method: "GET"
+		  format: "html"
+		   …%d
+		}
+		EOD;
+		
+		$this->assertDumpMatchesFormat($expected, $request);
 	}
 }
