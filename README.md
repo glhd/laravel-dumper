@@ -42,6 +42,10 @@ dump behavior for many core Laravel objects, including:
 - Database Connections
 - Carbon Instances
 
+Sample output:
+
+![Screen shot of dump output](https://user-images.githubusercontent.com/21592/150059496-a9d5dffc-1538-43b8-96b5-6f62f0ee6f68.png)
+
 ## Installation
 
 Install as a dev dependency:
