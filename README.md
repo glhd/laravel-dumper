@@ -41,22 +41,9 @@ dump behavior for many core Laravel objects, including:
 - Service Container
 - Database Connections
 - Carbon Instances
+- Requests and Responses
 
-<table border="0">
-<tbody>
-    <tr>
-        <td width="50%" valign="top">
-            <h3>Before</h3>
-            <img alt="Animated gif scrolling through hundreds of lines of debug output" src="https://user-images.githubusercontent.com/21592/150063119-10fd364b-17be-4b71-a0bc-2b0882292e17.gif" />
-        </td>
-        <td width="50%" valign="top">
-            <h3>After</h3>
-            <img alt="Small screenshot of query builder output with Laravel Dumper installed" src="https://user-images.githubusercontent.com/21592/150063393-5f69637f-39ad-406c-bac0-f489dd86e521.png" />
-        </td>
-    </tr>
-</tbody>
-</table>
-
+https://user-images.githubusercontent.com/21592/150163719-547ecd90-b029-4588-9648-34891e5e0886.mp4
 
 ## Installation
 
