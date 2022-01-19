@@ -88,59 +88,6 @@ class DatabaseCasterTest extends TestCase
 		$this->assertDumpMatchesFormat($expected, $builder);
 	}
 	
-	public function test_it_formats_very_long_sql(): void
-	{
-		$builder = DB::table('users')
-			->select(['one', 'two', 'three', 'four', 'five', 'six', 'seven'])
-			->where('one', 'this is a long string')
-			->orWhere('two', 'this is a long string')
-			->orWhere('three', 'this is a long string')
-			->orWhere('four', 'this is a long string')
-			->orWhere('five', 'this is a long string')
-			->orWhere('six', 'this is a long string')
-			->orWhere('seven', 'this is a long string')
-			->limit(10)
-			->orderBy('three');
-		
-		$expected = <<<EOD
-		Illuminate\Database\Query\Builder {
-		  sql: """
-		    select \\n
-		      "one", \\n
-		      "two", \\n
-		      "three", \\n
-		      "four", \\n
-		      "five", \\n
-		      "six", \\n
-		      "seven" \\n
-		    from \\n
-		      "users" \\n
-		    where \\n
-		      "one" = 'this is a long string' \\n
-		      or "two" = 'this is a long string' \\n
-		      or "three" = 'this is a long string' \\n
-		      or "four" = 'this is a long string' \\n
-		      or "five" = 'this is a long string' \\n
-		      or "six" = 'this is a long string' \\n
-		      or "seven" = 'this is a long string' \\n
-		    order by \\n
-		      "three" asc \\n
-		    limit \\n
-		      10
-		    """
-		  #connection: Illuminate\Database\SQLiteConnection {
-		    name: "testing"
-		    database: ":memory:"
-		    driver: "sqlite"
-		     …%d
-		  }
-		   …%d
-		}
-		EOD;
-		
-		$this->assertDumpMatchesFormat($expected, $builder);
-	}
-	
 	public function test_it_dumps_eloquent_query_builders(): void
 	{
 		$builder = User::query()
