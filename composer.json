@@ -36,7 +36,6 @@
       "Glhd\\LaravelDumper\\Tests\\": "tests/"
     }
   },
-  "minimum-stability": "stable",
   "scripts": {
     "post-autoload-dump": [
       "[ -d .git ] && vendor/bin/cghooks update || echo 'No git repository to update hooks'"
@@ -55,5 +54,7 @@
         "LaravelDumper": "Glhd\\LaravelDumper\\Facades\\LaravelDumper"
       }
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
