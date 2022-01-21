@@ -39,16 +39,11 @@ class LaravelDumperServiceProvider extends ServiceProvider
 	public function register()
 	{
 		$this->mergeConfigFrom("{$this->base_dir}/config.php", 'laravel-dumper');
-		$config = $this->app->make('config');
 		
-		$environments = $config->get('laravel-dumper.environments', ['local', 'testing']);
-		if (!$this->app->environment($environments)) {
-			return;
-		}
+		require_once __DIR__.'/helpers.php';
 		
-		$casters = array_merge($this->casters, $config->get('laravel-dumper.casters', []));
-		foreach ($casters as $caster) {
-			$caster::register($this->app);
+		if ($this->isEnabledInCurrentEnvironment()) {
+			$this->registerCasters();
 		}
 	}
 	
@@ -58,6 +53,22 @@ class LaravelDumperServiceProvider extends ServiceProvider
 			$this->publishes([
 				"{$this->base_dir}/config.php" => $this->app->configPath('laravel-dumper.php'),
 			], ['laravel-dumper', 'laravel-dumper-config']);
+		}
+	}
+	
+	protected function isEnabledInCurrentEnvironment(): bool
+	{
+		$environments = config('laravel-dumper.environments', ['local', 'testing']);
+		
+		return $this->app->environment($environments);
+	}
+	
+	protected function registerCasters(): void
+	{
+		$casters = array_merge($this->casters, config('laravel-dumper.casters', []));
+		
+		foreach ($casters as $caster) {
+			$caster::register($this->app);
 		}
 	}
 }
