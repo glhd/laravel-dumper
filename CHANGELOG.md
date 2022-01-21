@@ -5,6 +5,17 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Added
+
+- Added support for dynamic custom casters
+- Added `LaravelDumper` facade
+- Added custom `Properties` collection for easier manipulation of dumped properties
+
+### Changed
+
+- Changed `Caster` interface to use `Properties` collection
+- Updated all casters to use new `Properties` collection
+
 ## [0.2.0]
 
 ### Added

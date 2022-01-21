@@ -11,6 +11,7 @@ use Glhd\LaravelDumper\Casters\ModelCaster;
 use Glhd\LaravelDumper\Casters\ParameterBagCaster;
 use Glhd\LaravelDumper\Casters\RequestCaster;
 use Glhd\LaravelDumper\Casters\ResponseCaster;
+use Glhd\LaravelDumper\Support\CustomDumperRegistrar;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelDumperServiceProvider extends ServiceProvider
@@ -40,11 +41,15 @@ class LaravelDumperServiceProvider extends ServiceProvider
 	{
 		$this->mergeConfigFrom("{$this->base_dir}/config.php", 'laravel-dumper');
 		
+		if (!$this->isEnabledInCurrentEnvironment()) {
+			return;
+		}
+		
 		require_once __DIR__.'/helpers.php';
 		
-		if ($this->isEnabledInCurrentEnvironment()) {
-			$this->registerCasters();
-		}
+		$this->registerCasters();
+		
+		$this->app->singleton(CustomDumperRegistrar::class);
 	}
 	
 	public function boot()

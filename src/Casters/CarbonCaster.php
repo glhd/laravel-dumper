@@ -3,7 +3,7 @@
 namespace Glhd\LaravelDumper\Casters;
 
 use Carbon\CarbonInterface;
-use Symfony\Component\VarDumper\Caster\Caster as BaseCaster;
+use Glhd\LaravelDumper\Support\Properties;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
 class CarbonCaster extends Caster
@@ -12,27 +12,21 @@ class CarbonCaster extends Caster
 	
 	/**
 	 * @param CarbonInterface $target
-	 * @param array $properties
+	 * @param \Glhd\LaravelDumper\Support\Properties $properties
 	 * @param \Symfony\Component\VarDumper\Cloner\Stub $stub
 	 * @param bool $is_nested
 	 * @param int $filter
 	 * @return array
 	 */
-	public function cast($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
 	{
-		$date_key = Key::virtual('date');
-		
-		$result = [$date_key => $target->format($this->getFormat($target))];
-		
-		if (!$is_nested) {
-			$result += $properties;
-		}
-		
-		$result = BaseCaster::filter($result, BaseCaster::EXCLUDE_NULL, [], $filtered);
-		
-		$stub->cut += $filtered + count($properties) - count($result);
-		
-		return $result;
+		return $properties
+			->putVirtual('date', $target->format($this->getFormat($target)))
+			->when($is_nested, fn(Properties $properties) => $properties->only('date'))
+			->filter()
+			->reorder(['date', '*'])
+			->applyCutsToStub($stub, $properties)
+			->all();
 	}
 	
 	protected function getFormat(CarbonInterface $target): string

@@ -134,6 +134,8 @@ class CasterTest extends TestCase
 		  -isForwardedValid: true
 		  pathInfo: "/1"
 		  requestUri: "/1"
+		  baseUrl: ""
+		  basePath: ""
 		  method: "GET"
 		  format: "html"
 		   …%d
