@@ -1,0 +1,19 @@
+1a2
+>   date: 2022-01-18 19:44:02.572622 America/New_York (-05:00)
+5,14d5
+<   #localMonthsOverflow: null
+<   #localYearsOverflow: null
+<   #localStrictModeEnabled: null
+<   #localHumanDiffOptions: null
+<   #localToStringFormat: null
+<   #localSerializer: null
+<   #localMacros: null
+<   #localGenericMacros: null
+<   #localFormatFunction: null
+<   #localTranslator: null
+20,22c11
+<   #dumpLocale: null
+<   #dumpDateProperties: null
+<   date: 2022-01-18 19:44:02.572622 America/New_York (-05:00)
+---
+>    …23

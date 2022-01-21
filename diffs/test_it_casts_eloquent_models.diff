@@ -1,0 +1,104 @@
+2,11c2,8
+<   #guarded: []
+<   #connection: "testing"
+<   #table: "users"
+<   #primaryKey: "id"
+<   #keyType: "int"
+<   +incrementing: true
+<   #with: []
+<   #withCount: []
+<   +preventsLazyLoading: false
+<   #perPage: 15
+---
+>   +"id": 1
+>   +"company_id": 1
+>   +"email": "foo@bar.com"
+>   +"name": "Chris"
+>   +"created_at": "2022-01-21 09:28:14"
+>   +"updated_at": "2022-01-21 09:28:14"
+>   isDirty(): true
+14,21c11,22
+<   #escapeWhenCastingToString: false
+<   #attributes: array:6 [
+<     "name" => "Chris"
+<     "email" => "foo@bar.com"
+<     "company_id" => 1
+<     "updated_at" => "2022-01-21 09:28:14"
+<     "created_at" => "2022-01-21 09:28:14"
+<     "id" => 1
+---
+>   #relations: array:1 [
+>     "company" => Glhd\LaravelDumper\Tests\Company {
+>       +"id": 1
+>       +"name": "Galahad"
+>       +"created_at": "2022-01-21 09:28:14"
+>       +"updated_at": "2022-01-21 09:28:14"
+>       isDirty(): false
+>       +exists: true
+>       +wasRecentlyCreated: true
+>       #relations: []
+>        …27
+>     }
+22a24,25
+>   #connection: "testing"
+>   #table: "users"
+32,88c35
+<   #casts: []
+<   #classCastCache: []
+<   #attributeCastCache: []
+<   #dates: []
+<   #dateFormat: null
+<   #appends: []
+<   #dispatchesEvents: []
+<   #observables: []
+<   #relations: array:1 [
+<     "company" => Glhd\LaravelDumper\Tests\Company {
+<       #guarded: []
+<       #connection: "testing"
+<       #table: "companies"
+<       #primaryKey: "id"
+<       #keyType: "int"
+<       +incrementing: true
+<       #with: []
+<       #withCount: []
+<       +preventsLazyLoading: false
+<       #perPage: 15
+<       +exists: true
+<       +wasRecentlyCreated: true
+<       #escapeWhenCastingToString: false
+<       #attributes: array:4 [
+<         "name" => "Galahad"
+<         "updated_at" => "2022-01-21 09:28:14"
+<         "created_at" => "2022-01-21 09:28:14"
+<         "id" => 1
+<       ]
+<       #original: array:4 [
+<         "name" => "Galahad"
+<         "updated_at" => "2022-01-21 09:28:14"
+<         "created_at" => "2022-01-21 09:28:14"
+<         "id" => 1
+<       ]
+<       #changes: []
+<       #casts: []
+<       #classCastCache: []
+<       #attributeCastCache: []
+<       #dates: []
+<       #dateFormat: null
+<       #appends: []
+<       #dispatchesEvents: []
+<       #observables: []
+<       #relations: []
+<       #touches: []
+<       +timestamps: true
+<       #hidden: []
+<       #visible: []
+<       #fillable: []
+<     }
+<   ]
+<   #touches: []
+<   +timestamps: true
+<   #hidden: []
+<   #visible: []
+<   #fillable: []
+---
+>    …23

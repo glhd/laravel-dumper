@@ -1,0 +1,24 @@
+2,22c2
+<   0 => Illuminate\Container\Container {
+<     #resolved: []
+<     #bindings: []
+<     #methodBindings: []
+<     #instances: []
+<     #scopedInstances: []
+<     #aliases: []
+<     #abstractAliases: []
+<     #extenders: []
+<     #tags: []
+<     #buildStack: []
+<     #with: []
+<     +contextual: []
+<     #reboundCallbacks: []
+<     #globalBeforeResolvingCallbacks: []
+<     #globalResolvingCallbacks: []
+<     #globalAfterResolvingCallbacks: []
+<     #beforeResolvingCallbacks: []
+<     #resolvingCallbacks: []
+<     #afterResolvingCallbacks: []
+<   }
+---
+>   0 => Illuminate\Container\Container { …19}

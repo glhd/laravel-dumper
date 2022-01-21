@@ -6,12 +6,9 @@ use Carbon\Carbon;
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
 class CasterTest extends TestCase
 {
-	use VarDumperTestTrait;
-	
 	public function test_it_casts_carbon_instances(): void
 	{
 		$now = Carbon::parse('2022-01-18 19:44:02.572622', 'America/New_York');

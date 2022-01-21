@@ -1,0 +1,30 @@
+2,4d1
+<   #resolved: array:1 [
+<     "Glhd\LaravelDumper\Tests\CasterTest" => true
+<   ]
+16,18d12
+<   #methodBindings: []
+<   #instances: []
+<   #scopedInstances: []
+22,25c16,17
+<   #abstractAliases: array:1 [
+<     "Glhd\LaravelDumper\Tests\CasterTest" => array:1 [
+<       0 => "bar"
+<     ]
+---
+>   #resolved: array:1 [
+>     "Glhd\LaravelDumper\Tests\CasterTest" => true
+37,47c29
+<   #tags: []
+<   #buildStack: []
+<   #with: []
+<   +contextual: []
+<   #reboundCallbacks: []
+<   #globalBeforeResolvingCallbacks: []
+<   #globalResolvingCallbacks: []
+<   #globalAfterResolvingCallbacks: []
+<   #beforeResolvingCallbacks: []
+<   #resolvingCallbacks: []
+<   #afterResolvingCallbacks: []
+---
+>    …15

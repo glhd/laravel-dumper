@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
 class DatabaseCasterTest extends TestCase
 {
 	use RefreshDatabase;
-	use VarDumperTestTrait;
 	
 	public function test_it_casts_eloquent_models(): void
 	{
