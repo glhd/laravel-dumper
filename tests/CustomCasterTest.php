@@ -15,6 +15,9 @@ class CustomCasterTest extends TestCase
 			->filter()
 			->reorder(['dyn', 'foo']);
 		
+		LaravelDumper::for(MyOtherCustomObject::class)
+			->virtual('foo', fn() => 'bar');
+		
 		$expected = <<<EOD
 		Glhd\LaravelDumper\Tests\MyCustomObject {
 		  +"dyn": "this is a dynamic prop"
@@ -25,6 +28,14 @@ class CustomCasterTest extends TestCase
 		EOD;
 		
 		$this->assertDumpEquals($expected, new MyCustomObject());
+		
+		$expected = <<<EOD
+		Glhd\LaravelDumper\Tests\MyOtherCustomObject {
+		  foo: "bar"
+		}
+		EOD;
+		
+		$this->assertDumpEquals($expected, new MyOtherCustomObject());
 	}
 }
 
@@ -37,4 +48,8 @@ class MyCustomObject
 	protected $nothing = null;
 	
 	protected $nah = [];
+}
+
+class MyOtherCustomObject
+{
 }
