@@ -3,6 +3,7 @@
 namespace Glhd\LaravelDumper\Tests;
 
 use Glhd\LaravelDumper\Casters\Caster;
+use Glhd\LaravelDumper\Facades\LaravelDumper;
 use Glhd\LaravelDumper\LaravelDumperServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -25,7 +26,9 @@ abstract class TestCase extends Orchestra
 	
 	protected function getPackageAliases($app)
 	{
-		return [];
+		return [
+			'LaravelDumper' => LaravelDumper::class,
+		];
 	}
 	
 	protected function getApplicationTimezone($app)
