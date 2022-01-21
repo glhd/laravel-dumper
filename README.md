@@ -73,13 +73,13 @@ a single piece of `summary` data):
 ```php
 class UserCaster extends Caster
 {
-	public static array $targets = [User::class];
+  public static array $targets = [User::class];
 	
-	public function cast($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0): array
-	{
-		return [
-		    Key::virtual('summary') => "$target->name ($target->email)",
-        ];
-	}
+  public function cast($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+  {
+    return [
+      Key::virtual('summary') => "$target->name ($target->email)",
+    ];
+  }
 }
 ```
