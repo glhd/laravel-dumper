@@ -1,7 +1,7 @@
-*** before	Fri Jan 21 09:43:35 2022
---- after	Fri Jan 21 09:43:35 2022
+*** Without glhd/laravel dumper	2022-01-21 09:53:51.000000000 -0500
+--- With glhd/laravel-dumper	2022-01-21 09:53:51.000000000 -0500
 ***************
-*** 1,11238 ****
+*** 1,11250 ****
   Illuminate\Database\Eloquent\Builder {
 !   #query: Illuminate\Database\Query\Builder {
 !     +connection: Illuminate\Database\SQLiteConnection {
@@ -2303,57 +2303,55 @@
 !                         0 => PHPUnit\Runner\ResultCacheExtension {
 !                           -cache: PHPUnit\Runner\DefaultTestResultCache {
 !                             -cacheFilename: "/Users/inxilpro/Development/open-source/laravel-dumper/.phpunit.result.cache"
-!                             -defects: array:15 [
+!                             -defects: array:16 [
 !                               "Glhd\LaravelDumper\Tests\LaravelCastsTest::test_it_cuts_the_internals_from_the_container" => 3
 !                               "Glhd\LaravelDumper\Tests\LaravelCastsTest::test_it_cuts_most_internals_from_a_container" => 3
 !                               "Glhd\LaravelDumper\Tests\ModelCastTest::test_model" => 3
 !                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_pushes_carbon_date_to_top" => 3
-!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_most_internals_from_a_container" => 3
-!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_all_internals_from_a_nested_container" => 3
-!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_casts_eloquent_models" => 3
-!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_basic_query_builders" => 3
-!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_eloquent_query_builders" => 3
-!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_eloquent_relations" => 3
+!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_most_internals_from_a_container" => 4
+!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_all_internals_from_a_nested_container" => 4
+!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_casts_eloquent_models" => 4
+!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_basic_query_builders" => 4
+!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_eloquent_query_builders" => 4
+!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_eloquent_relations" => 4
 !                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_handles_debuginfo" => 5
 !                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_casts_carbon_instances" => 4
 !                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_internals_from_dispatcher" => 3
-!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_response" => 3
+!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_response" => 4
 !                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_formats_very_long_sql" => 3
+!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_request" => 4
 !                             ]
 !                             -times: array:16 [
 !                               "Glhd\LaravelDumper\Tests\LaravelCastsTest::test_it_cuts_the_internals_from_the_container" => 0.103
 !                               "Glhd\LaravelDumper\Tests\LaravelCastsTest::test_it_cuts_most_internals_from_a_container" => 0.06
 !                               "Glhd\LaravelDumper\Tests\ModelCastTest::test_model" => 0.146
 !                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_pushes_carbon_date_to_top" => 0.06
-!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_most_internals_from_a_container" => 0.025
-!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_all_internals_from_a_nested_container" => 0.022
+!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_most_internals_from_a_container" => 0.024
+!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_all_internals_from_a_nested_container" => 0.021
 !                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_casts_eloquent_models" => 0.112
-!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_basic_query_builders" => 0.283
-!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_eloquent_query_builders" => 0.296
-!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_eloquent_relations" => 0.297
+!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_basic_query_builders" => 0.293
+!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_eloquent_query_builders" => 0.285
+!                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_dumps_eloquent_relations" => 0.285
 !                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_handles_debuginfo" => 0.012
-!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_casts_carbon_instances" => 0.07
+!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_casts_carbon_instances" => 0.067
 !                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_cuts_internals_from_dispatcher" => 0.057
-!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_response" => 0.023
+!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_response" => 0.024
 !                               "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_formats_very_long_sql" => 0.138
-!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_request" => 0.024
+!                               "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_request" => 0.025
 !                             ]
 !                           }
 !                         }
 !                       ]
 !                       -lastTestWasNotSuccessful: false
 !                     }
-!                     1 => PHPUnit\Util\Log\TeamCity {
-!                       -isSummaryTestCountPrinted: true
-!                       -startedTestName: "test_it_dumps_eloquent_query_builders"
-!                       -flowId: 26418
-!                       #column: 0
-!                       #maxColumn: null
+!                     1 => PHPUnit\TextUI\DefaultResultPrinter {
+!                       #column: 7
+!                       #maxColumn: 67
 !                       #lastTestFailed: false
 !                       #numAssertions: 7
-!                       #numTests: -1
-!                       #numTestsRun: 0
-!                       #numTestsWidth: null
+!                       #numTests: 9
+!                       #numTestsRun: 7
+!                       #numTestsWidth: 1
 !                       #colors: true
 !                       #debug: false
 !                       #verbose: false
@@ -2362,7 +2360,7 @@
 !                       -defectListPrinted: false
 !                       -timer: SebastianBergmann\Timer\Timer {
 !                         -startTimes: array:1 [
-!                           0 => 62837132630879.0
+!                           0 => 63453052579113.0
 !                         ]
 !                       }
 !                       -stream: null
@@ -2370,7 +2368,7 @@
 !                     }
 !                   ]
 !                   -runTests: 8
-!                   -time: 0.558829072
+!                   -time: 0.566042712
 !                   -codeCoverage: null
 !                   -convertDeprecationsToExceptions: false
 !                   -convertErrorsToExceptions: true
@@ -3045,7 +3043,7 @@
 !                 #parameters: []
 !               }
 !               +server: Symfony\Component\HttpFoundation\ServerBag {
-!                 #parameters: array:49 [
+!                 #parameters: array:67 [
 !                   "SERVER_NAME" => "localhost"
 !                   "SERVER_PORT" => 80
 !                   "HTTP_HOST" => "localhost"
@@ -3054,48 +3052,62 @@
 !                   "HTTP_ACCEPT_LANGUAGE" => "en-us,en;q=0.5"
 !                   "HTTP_ACCEPT_CHARSET" => "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
 !                   "REMOTE_ADDR" => "127.0.0.1"
-!                   "SCRIPT_NAME" => "/Users/inxilpro/Development/open-source/laravel-dumper/vendor/phpunit/phpunit/phpunit"
-!                   "SCRIPT_FILENAME" => "/Users/inxilpro/Development/open-source/laravel-dumper/vendor/phpunit/phpunit/phpunit"
+!                   "SCRIPT_NAME" => "vendor/bin/phpunit"
+!                   "SCRIPT_FILENAME" => "vendor/bin/phpunit"
 !                   "SERVER_PROTOCOL" => "HTTP/1.1"
-!                   "REQUEST_TIME" => 1642776214
-!                   "REQUEST_TIME_FLOAT" => 1642776214.3092
-!                   "PATH" => "/usr/local/bin:/usr/local/sbin:/Users/inxilpro/.composer/vendor/bin:/Users/inxilpro/.yarn/bin:/usr/local/bin:/Users/inxilpro/.config/yarn/global/node_modules/.bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/bin:/sbin:/Users/inxilpro/bin:/Users/inxilpro/.composer/vendor/bin:/Users/inxilpro/.yarn/bin"
-!                   "IDE_PHPUNIT_CUSTOM_LOADER" => "/Users/inxilpro/Development/open-source/laravel-dumper/vendor/autoload.php"
-!                   "APP_ENV" => "local"
+!                   "REQUEST_TIME" => 1642776830
+!                   "REQUEST_TIME_FLOAT" => 1642776830.224
+!                   "WRITE_DIFFS" => "1"
+!                   "TERM_PROGRAM" => "iTerm.app"
+!                   "PHP_BINARY" => "/usr/local/Cellar/php@7.4/7.4.26_1.reinstall/bin/php"
+!                   "COMPOSER_BINARY" => "/Users/inxilpro/bin/composer"
 !                   "TERM" => "xterm-256color"
-!                   "COMMAND_MODE" => "unix2003"
-!                   "LOGNAME" => "inxilpro"
-!                   "XPC_SERVICE_NAME" => "application.com.jetbrains.PhpStorm.79365548.79367461"
-!                   "PWD" => "/Users/inxilpro/Development/open-source/laravel-dumper"
-!                   "__CFBundleIdentifier" => "com.jetbrains.PhpStorm"
 !                   "SHELL" => "/bin/zsh"
+!                   "TMPDIR" => "/var/folders/wq/7r254byn65xbhgpsfn__xcl00000gn/T/"
+!                   "TERM_PROGRAM_VERSION" => "3.5.0beta4"
+!                   "XDEBUG_HANDLER_SETTINGS" => "/private/var/folders/wq/7r254byn65xbhgpsfn__xcl00000gn/T/nM39lq|1|*|*|/usr/local/etc/php/7.4/php.ini:/usr/local/etc/php/7.4/conf.d/error_log.ini:/usr/local/etc/php/7.4/conf.d/ext-imagick.ini:/usr/local/etc/php/7.4/conf.d/ext-opcache.ini:/usr/local/etc/php/7.4/conf.d/ext-xdebug.ini:/usr/local/etc/php/7.4/conf.d/php-memory-limits.ini|2.9.6"
+!                   "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" => "fg=240"
+!                   "TERM_SESSION_ID" => "w0t0p0:CCB91CBF-8B4F-4D42-A80C-5604BE31C02A"
+!                   "ZSH" => "/Users/inxilpro/.oh-my-zsh"
+!                   "USER" => "inxilpro"
+!                   "COMMAND_MODE" => "unix2003"
+!                   "SSH_AUTH_SOCK" => "/private/tmp/com.apple.launchd.j7ho9zorvj/Listeners"
+!                   "__CF_USER_TEXT_ENCODING" => "0x1F5:0x0:0x0"
 !                   "PAGER" => "less"
 !                   "LSCOLORS" => "Gxfxcxdxbxegedabagacad"
 !                   "COMPOSER_MEMORY_LIMIT" => "-1"
-!                   "OLDPWD" => "/"
-!                   "USER" => "inxilpro"
-!                   "ZSH" => "/Users/inxilpro/.oh-my-zsh"
-!                   "TMPDIR" => "/var/folders/wq/7r254byn65xbhgpsfn__xcl00000gn/T/"
-!                   "SSH_AUTH_SOCK" => "/private/tmp/com.apple.launchd.j7ho9zorvj/Listeners"
+!                   "TERMINFO_DIRS" => "/Applications/iTerm.app/Contents/Resources/terminfo:/usr/share/terminfo"
+!                   "PATH" => "/Users/inxilpro/Development/open-source/laravel-dumper/vendor/bin:/usr/local/bin:/usr/local/sbin:/Users/inxilpro/.composer/vendor/bin:/Users/inxilpro/.yarn/bin:/usr/local/bin:/Users/inxilpro/.config/yarn/global/node_modules/.bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/bin:/sbin:/Users/inxilpro/bin:/Users/inxilpro/.composer/vendor/bin:/Users/inxilpro/.yarn/bin"
+!                   "_" => "vendor/bin/phpunit"
+!                   "__CFBundleIdentifier" => "com.googlecode.iterm2"
+!                   "PWD" => "/Users/inxilpro/Development/open-source/laravel-dumper"
 !                   "EDITOR" => "subl -w"
+!                   "COMPOSER_DEV_MODE" => "1"
+!                   "LANG" => "en_US.UTF-8"
+!                   "ITERM_PROFILE" => "Default"
 !                   "XPC_FLAGS" => "0x0"
-!                   "__CF_USER_TEXT_ENCODING" => "0x1F5:0x0:0x0"
-!                   "LESS" => "-R"
 !                   "NODE_ENV" => "development"
-!                   "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" => "fg=240"
-!                   "LC_CTYPE" => "en_US.UTF-8"
+!                   "XPC_SERVICE_NAME" => "0"
+!                   "SHLVL" => "2"
 !                   "HOME" => "/Users/inxilpro"
-!                   "PHP_SELF" => "/Users/inxilpro/Development/open-source/laravel-dumper/vendor/phpunit/phpunit/phpunit"
-!                   "PATH_TRANSLATED" => "/Users/inxilpro/Development/open-source/laravel-dumper/vendor/phpunit/phpunit/phpunit"
+!                   "COLORFGBG" => "15;0"
+!                   "LANGUAGE" => "C"
+!                   "LC_TERMINAL_VERSION" => "3.5.0beta4"
+!                   "COMPOSER_ORIGINAL_INIS" => "/usr/local/etc/php/7.4/php.ini:/usr/local/etc/php/7.4/conf.d/error_log.ini:/usr/local/etc/php/7.4/conf.d/ext-imagick.ini:/usr/local/etc/php/7.4/conf.d/ext-opcache.ini:/usr/local/etc/php/7.4/conf.d/ext-xdebug.ini:/usr/local/etc/php/7.4/conf.d/php-memory-limits.ini"
+!                   "ITERM_SESSION_ID" => "w0t0p0:CCB91CBF-8B4F-4D42-A80C-5604BE31C02A"
+!                   "LESS" => "-R"
+!                   "LOGNAME" => "inxilpro"
+!                   "GIT_ASKPASS" => "echo"
+!                   "APP_ENV" => "local"
+!                   "LC_TERMINAL" => "iTerm2"
+!                   "COLORTERM" => "truecolor"
+!                   "PHP_SELF" => "vendor/bin/phpunit"
+!                   "PATH_TRANSLATED" => "vendor/bin/phpunit"
 !                   "DOCUMENT_ROOT" => ""
-!                   "argv" => array:5 [
-!                     0 => "/Users/inxilpro/Development/open-source/laravel-dumper/vendor/phpunit/phpunit/phpunit"
-!                     1 => "--configuration"
-!                     2 => "/Users/inxilpro/Development/open-source/laravel-dumper/phpunit.xml"
-!                     3 => "/Users/inxilpro/Development/open-source/laravel-dumper/tests"
-!                     4 => "--teamcity"
+!                   "argv" => array:1 [
+!                     0 => "vendor/bin/phpunit"
 !                   ]
-!                   "argc" => 5
+!                   "argc" => 1
 !                   "SHELL_VERBOSITY" => 0
 !                   "PATH_INFO" => ""
 !                   "REQUEST_METHOD" => "GET"
@@ -5748,10 +5760,10 @@
 !                     #name: "schedule:run"
 !                     #description: "Run the scheduled commands"
 !                     #schedule: null
-!                     #startedAt: Illuminate\Support\Carbon @1642776214 {
+!                     #startedAt: Illuminate\Support\Carbon @1642776830 {
 !                       #endOfTime: false
 !                       #startOfTime: false
-!                       #constructedObjectId: "000000001221e7de0000000041b4870e"
+!                       #constructedObjectId: "000000001d02a2350000000032800d18"
 !                       #localMonthsOverflow: null
 !                       #localYearsOverflow: null
 !                       #localStrictModeEnabled: null
@@ -5769,7 +5781,7 @@
 !                       ]
 !                       #dumpLocale: null
 !                       #dumpDateProperties: null
-!                       date: 2022-01-21 09:43:34.937560 America/New_York (-05:00)
+!                       date: 2022-01-21 09:53:50.855050 America/New_York (-05:00)
 !                     }
 !                     #eventsRan: false
 !                     #dispatcher: null
@@ -11254,7 +11266,7 @@
       "company" => Closure() {
         class: "Illuminate\Database\Eloquent\Builder"
 ***************
-*** 11240,11273 ****
+*** 11252,11285 ****
         line: "1364 to 1366"
       }
     ]

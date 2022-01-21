@@ -59,6 +59,11 @@ Just use `dd()` as you would normally, and enjoy the newly curated output! If, f
 you really need the full debug output for an object that `laravel-dumper` customizes, you can
 do a "full" dump with `ddf()` and `dumpf()`.
 
+## Comparison to Default Output
+
+You can see comparisons between the default `dd()` output and the `laravel-dumper` output
+in the [diffs](/diffs/) directory of this repository.
+
 ## Custom Casters
 
 > Please note, the API for custom casting is likely to change. Use at your own risk!

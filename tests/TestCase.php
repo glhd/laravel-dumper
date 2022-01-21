@@ -34,6 +34,10 @@ abstract class TestCase extends Orchestra
 	
 	protected function getDump($data, $key = null, int $filter = 0): ?string
 	{
+		if (null === getenv('WRITE_DIFFS')) {
+			return $this->baseGetDump($data, $key, $filter);
+		}
+		
 		Caster::disable();
 		$before = $this->baseGetDump($data, $key, $filter);
 		
@@ -62,7 +66,7 @@ abstract class TestCase extends Orchestra
 			
 			$diff = (new Process(['/usr/bin/diff', '-c', $before_file, $after_file]));
 			$diff->run();
-			$fs->put("{$path}/{$test_name}.diff", str_replace([$before_file, $after_file], ['before', 'after'], $diff->getOutput()));
+			$fs->put("{$path}/{$test_name}.diff", str_replace([$before_file, $after_file], ['Without glhd/laravel dumper', 'With glhd/laravel-dumper'], $diff->getOutput()));
 		} finally {
 			$fs->delete([$before_file, $after_file]);
 		}

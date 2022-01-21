@@ -1,5 +1,5 @@
-*** before	Fri Jan 21 09:43:34 2022
---- after	Fri Jan 21 09:43:34 2022
+*** Without glhd/laravel dumper	2022-01-21 09:53:50.000000000 -0500
+--- With glhd/laravel-dumper	2022-01-21 09:53:50.000000000 -0500
 ***************
 *** 1,7 ****
   Illuminate\Container\Container {

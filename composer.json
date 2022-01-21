@@ -40,7 +40,8 @@
   "scripts": {
     "post-autoload-dump": [
       "[ -d .git ] && vendor/bin/cghooks update || echo 'No git repository to update hooks'"
-    ]
+    ],
+    "write-diffs": "WRITE_DIFFS=1 vendor/bin/phpunit"
   },
   "hooks": {
     "pre-commit": "[ -f vendor/bin/php-cs-fixer ] && ./bin/pre-commit.sh"
