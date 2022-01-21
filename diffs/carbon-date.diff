@@ -1,0 +1,28 @@
+--- Before	2022-01-21 10:07:07.000000000 -0500
++++ After	2022-01-21 10:07:07.000000000 -0500
+@@ -1,23 +1,12 @@
+ Carbon\Carbon @1642553042 {
++  date: 2022-01-18 19:44:02.572622 America/New_York (-05:00)
+   #endOfTime: false
+   #startOfTime: false
+   #constructedObjectId: "000000007b7374ed00000000479fb1ca"
+-  #localMonthsOverflow: null
+-  #localYearsOverflow: null
+-  #localStrictModeEnabled: null
+-  #localHumanDiffOptions: null
+-  #localToStringFormat: null
+-  #localSerializer: null
+-  #localMacros: null
+-  #localGenericMacros: null
+-  #localFormatFunction: null
+-  #localTranslator: null
+   #dumpProperties: array:3 [
+     0 => "date"
+     1 => "timezone_type"
+     2 => "timezone"
+   ]
+-  #dumpLocale: null
+-  #dumpDateProperties: null
+-  date: 2022-01-18 19:44:02.572622 America/New_York (-05:00)
++   …23
+ }

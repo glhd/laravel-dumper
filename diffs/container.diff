@@ -1,0 +1,46 @@
+--- Before	2022-01-21 10:07:07.000000000 -0500
++++ After	2022-01-21 10:07:07.000000000 -0500
+@@ -1,7 +1,4 @@
+ Illuminate\Container\Container {
+-  #resolved: array:1 [
+-    "Glhd\LaravelDumper\Tests\CasterTest" => true
+-  ]
+   #bindings: array:1 [
+     "Glhd\LaravelDumper\Tests\CasterTest" => array:2 [
+       "concrete" => Closure() {
+@@ -13,16 +10,11 @@
+       "shared" => false
+     ]
+   ]
+-  #methodBindings: []
+-  #instances: []
+-  #scopedInstances: []
+   #aliases: array:1 [
+     "bar" => "Glhd\LaravelDumper\Tests\CasterTest"
+   ]
+-  #abstractAliases: array:1 [
+-    "Glhd\LaravelDumper\Tests\CasterTest" => array:1 [
+-      0 => "bar"
+-    ]
++  #resolved: array:1 [
++    "Glhd\LaravelDumper\Tests\CasterTest" => true
+   ]
+   #extenders: array:1 [
+     "Glhd\LaravelDumper\Tests\CasterTest" => array:1 [
+@@ -34,15 +26,5 @@
+       }
+     ]
+   ]
+-  #tags: []
+-  #buildStack: []
+-  #with: []
+-  +contextual: []
+-  #reboundCallbacks: []
+-  #globalBeforeResolvingCallbacks: []
+-  #globalResolvingCallbacks: []
+-  #globalAfterResolvingCallbacks: []
+-  #beforeResolvingCallbacks: []
+-  #resolvingCallbacks: []
+-  #afterResolvingCallbacks: []
++   …15
+ }

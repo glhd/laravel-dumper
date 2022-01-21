@@ -11,7 +11,7 @@ class DatabaseCasterTest extends TestCase
 {
 	use RefreshDatabase;
 	
-	public function test_it_casts_eloquent_models(): void
+	public function test_eloquent_model(): void
 	{
 		Date::setTestNow($now = now());
 		
@@ -64,7 +64,7 @@ class DatabaseCasterTest extends TestCase
 		$this->assertDumpMatchesFormat($expected, $user);
 	}
 	
-	public function test_it_dumps_basic_query_builders(): void
+	public function test_query_builder(): void
 	{
 		$builder = DB::table('users')
 			->where('email', 'bogdan@foo.com')
@@ -86,7 +86,7 @@ class DatabaseCasterTest extends TestCase
 		$this->assertDumpMatchesFormat($expected, $builder);
 	}
 	
-	public function test_it_dumps_eloquent_query_builders(): void
+	public function test_eloquent_builder(): void
 	{
 		$builder = User::query()
 			->with('company')
@@ -117,7 +117,7 @@ class DatabaseCasterTest extends TestCase
 		$this->assertDumpMatchesFormat($expected, $builder);
 	}
 	
-	public function test_it_dumps_eloquent_relations(): void
+	public function test_eloquent_relation(): void
 	{
 		Company::create(['id' => 1, 'name' => 'Galahad']);
 		$user = User::create(['id' => 1, 'name' => 'John', 'email' => 'foo@bar.com', 'company_id' => 1]);

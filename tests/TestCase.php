@@ -5,6 +5,7 @@ namespace Glhd\LaravelDumper\Tests;
 use Glhd\LaravelDumper\Casters\Caster;
 use Glhd\LaravelDumper\LaravelDumperServiceProvider;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Symfony\Component\Process\Process;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
@@ -55,18 +56,18 @@ abstract class TestCase extends Orchestra
 		$path = __DIR__.'/../diffs';
 		
 		[$_, $_, $_, $caller] = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 4);
-		$test_name = $caller['function'];
+		$name = Str::of($caller['function'])->after('test_')->replace('_', '-');
 		
-		$before_file = "{$path}/{$test_name}-before.txt";
-		$after_file = "{$path}/{$test_name}-after.txt";
+		$before_file = "{$path}/{$name}.1.txt";
+		$after_file = "{$path}/{$name}.2.txt";
 		
 		try {
 			$fs->put($before_file, "{$before}\n");
 			$fs->put($after_file, "{$after}\n");
 			
-			$diff = (new Process(['/usr/bin/diff', '-c', $before_file, $after_file]));
+			$diff = (new Process(['/usr/bin/diff', '-u', $before_file, $after_file]));
 			$diff->run();
-			$fs->put("{$path}/{$test_name}.diff", str_replace([$before_file, $after_file], ['Without glhd/laravel dumper', 'With glhd/laravel-dumper'], $diff->getOutput()));
+			$fs->put("{$path}/{$name}.diff", str_replace([$before_file, $after_file], ['Before', 'After'], $diff->getOutput()));
 		} finally {
 			$fs->delete([$before_file, $after_file]);
 		}
