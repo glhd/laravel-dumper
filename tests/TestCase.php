@@ -45,12 +45,12 @@ abstract class TestCase extends Orchestra
 		Caster::enable();
 		$after = $this->baseGetDump($data, $key, $filter);
 		
-		$this->writeDiff($data, $before, $after);
+		$this->writeDiff($before, $after);
 		
 		return $after;
 	}
 	
-	protected function writeDiff($data, $before, $after)
+	protected function writeDiff($before, $after)
 	{
 		$fs = new Filesystem();
 		$path = __DIR__.'/../diffs';
