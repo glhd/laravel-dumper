@@ -5,6 +5,10 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Added
+
+- Added `ddf()` and `dumpf()` for access to original `dd()` and `dump()` behavior
+
 ## [0.1.0]
 
 ### Added

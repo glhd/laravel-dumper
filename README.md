@@ -55,4 +55,31 @@ Install as a dev dependency:
 
 ## Usage
 
-Just use `dd()` as you would normally, and enjoy the newly curated output!
+Just use `dd()` as you would normally, and enjoy the newly curated output! If, for some reason,
+you really need the full debug output for an object that `laravel-dumper` customizes, you can
+do a "full" dump with `ddf()` and `dumpf()`.
+
+## Custom Casters
+
+> Please note, the API for custom casting is likely to change. Use at your own risk!
+
+It's possible to register your own casters for any class by publishing the `laravel-dumper`
+config file and registering your custom classes in the `'casters'` section of the config.
+
+Your custom casters should extend `Glhd\LaravelDumper\Casters\Caster` and would look
+something like (this example would mean that dumped `User` objects would only include
+a single piece of `summary` data):
+
+```php
+class UserCaster extends Caster
+{
+	public static array $targets = [User::class];
+	
+	public function cast($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	{
+		return [
+		    Key::virtual('summary') => "$target->name ($target->email)",
+        ];
+	}
+}
+```
