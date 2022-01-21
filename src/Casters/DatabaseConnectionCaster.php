@@ -2,6 +2,8 @@
 
 namespace Glhd\LaravelDumper\Casters;
 
+use Glhd\LaravelDumper\Support\Key;
+use Glhd\LaravelDumper\Support\Properties;
 use Illuminate\Database\ConnectionInterface;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
@@ -11,21 +13,17 @@ class DatabaseConnectionCaster extends Caster
 	
 	/**
 	 * @param ConnectionInterface $target
-	 * @param array $properties
+	 * @param \Glhd\LaravelDumper\Support\Properties $properties
 	 * @param \Symfony\Component\VarDumper\Cloner\Stub $stub
 	 * @param bool $is_nested
 	 * @param int $filter
 	 * @return array
 	 */
-	public function cast($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
 	{
-		$key = Key::protected('config');
-		
-		if (!isset($properties[$key])) {
-			return $properties;
+		if (!is_array($config = $properties->getProtected('config'))) {
+			return $properties->all();
 		}
-		
-		$config = $properties[$key];
 		
 		$stub->cut += count($properties);
 		

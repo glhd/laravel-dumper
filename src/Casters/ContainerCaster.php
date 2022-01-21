@@ -2,8 +2,8 @@
 
 namespace Glhd\LaravelDumper\Casters;
 
+use Glhd\LaravelDumper\Support\Properties;
 use Illuminate\Contracts\Container\Container;
-use Symfony\Component\VarDumper\Caster\Caster as BaseCaster;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
 class ContainerCaster extends Caster
@@ -17,23 +17,17 @@ class ContainerCaster extends Caster
 		'extenders',
 	];
 	
-	public function cast($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
 	{
-		$result = [];
-		
-		if (!$is_nested) {
-			// We want to do this in a foreach so that we can re-order the list as well as filter it
-			foreach ($this->included as $property) {
-				$index = Key::protected($property);
-				if (isset($properties[$index])) {
-					$result[$index] = $properties[$index];
-				}
-			}
+		if ($is_nested) {
+			$stub->cut += $properties->count();
+			return [];
 		}
 		
-		$result = BaseCaster::filter($result, BaseCaster::EXCLUDE_EMPTY, [], $filtered);
-		$stub->cut += $filtered + count($properties) - count($result);
-		
-		return $result;
+		return $properties
+			->only($this->included)
+			->reorder($this->included)
+			->applyCutsToStub($stub, $properties)
+			->all();
 	}
 }

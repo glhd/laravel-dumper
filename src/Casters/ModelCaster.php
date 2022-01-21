@@ -2,8 +2,9 @@
 
 namespace Glhd\LaravelDumper\Casters;
 
+use Glhd\LaravelDumper\Support\Key;
+use Glhd\LaravelDumper\Support\Properties;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
 class ModelCaster extends Caster
@@ -11,24 +12,24 @@ class ModelCaster extends Caster
 	public static array $targets = [Model::class];
 	
 	protected array $attribute_order = [
-		'id' => 1,
-		'*_id' => 2,
-		'*' => 3,
-		'*_at' => 4,
-		'created_at' => 5,
-		'updated_at' => 6,
-		'deleted_at' => 7,
+		'id',
+		'*_id',
+		'*',
+		'*_at',
+		'created_at',
+		'updated_at',
+		'deleted_at',
 	];
 	
 	/**
 	 * @param Model $target
-	 * @param array $properties
+	 * @param \Glhd\LaravelDumper\Support\Properties $properties
 	 * @param \Symfony\Component\VarDumper\Cloner\Stub $stub
 	 * @param bool $is_nested
 	 * @param int $filter
 	 * @return array
 	 */
-	public function cast($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
 	{
 		return array_merge(
 			$this->attributesToDynamicProperties($target),
@@ -39,9 +40,9 @@ class ModelCaster extends Caster
 	
 	protected function attributesToDynamicProperties(Model $obj): array
 	{
-		return collect($obj->getAttributes())
+		return Properties::make($obj->getAttributes())
 			->sortKeys()
-			->sortBy(fn($value, $key) => $this->getAttributePosition($key))
+			->reorder($this->attribute_order)
 			->mapWithKeys(fn($value, $key) => [Key::dynamic($key) => $value])
 			->all();
 	}
@@ -53,20 +54,7 @@ class ModelCaster extends Caster
 		];
 	}
 	
-	protected function getAttributePosition(string $attribute): int
-	{
-		$result = $this->attribute_order['*'];
-		
-		foreach ($this->attribute_order as $pattern => $position) {
-			if ('*' !== $pattern && Str::is($pattern, $attribute)) {
-				$result = $position;
-			}
-		}
-		
-		return $result;
-	}
-	
-	protected function cutProperties(array $properties, Stub $stub, bool $isNested): array
+	protected function cutProperties(Properties $properties, Stub $stub, bool $is_nested): array
 	{
 		$keep = [
 			'exists',
@@ -74,7 +62,7 @@ class ModelCaster extends Caster
 			Key::protected('relations'),
 		];
 		
-		if (!$isNested) {
+		if (!$is_nested) {
 			$keep = array_merge($keep, [
 				Key::protected('connection'),
 				Key::protected('table'),
@@ -83,16 +71,10 @@ class ModelCaster extends Caster
 			]);
 		}
 		
-		// Doing this in a foreach allows us to update the order while filtering
-		$result = [];
-		foreach ($keep as $key) {
-			if (isset($properties[$key])) {
-				$result[$key] = $properties[$key];
-			}
-		}
-		
-		$stub->cut += (count($properties) - count($result));
-		
-		return $result;
+		return $properties
+			->only($keep)
+			->reorder($keep)
+			->applyCutsToStub($stub, $properties)
+			->all();
 	}
 }
