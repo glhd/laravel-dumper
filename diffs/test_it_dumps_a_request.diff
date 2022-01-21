@@ -1,112 +1,133 @@
-2,14c2,4
-<   #json: null
-<   #convertedFiles: null
-<   #userResolver: null
-<   #routeResolver: null
-<   +attributes: Symfony\Component\HttpFoundation\ParameterBag {
-<     #parameters: []
-<   }
-<   +request: Symfony\Component\HttpFoundation\InputBag {
-<     #parameters: []
-<   }
-<   +query: Symfony\Component\HttpFoundation\InputBag {
-<     #parameters: []
-<   }
----
->   +attributes: Symfony\Component\HttpFoundation\ParameterBag {}
->   +request: Symfony\Component\HttpFoundation\InputBag {}
->   +query: Symfony\Component\HttpFoundation\InputBag {}
-16,40c6,22
-<     #parameters: array:17 [
-<       "SERVER_NAME" => "localhost"
-<       "SERVER_PORT" => 80
-<       "HTTP_HOST" => "localhost"
-<       "HTTP_USER_AGENT" => "Symfony"
-<       "HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-<       "HTTP_ACCEPT_LANGUAGE" => "en-us,en;q=0.5"
-<       "HTTP_ACCEPT_CHARSET" => "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
-<       "REMOTE_ADDR" => "127.0.0.1"
-<       "SCRIPT_NAME" => ""
-<       "SCRIPT_FILENAME" => ""
-<       "SERVER_PROTOCOL" => "HTTP/1.1"
-<       "REQUEST_TIME" => 1642775290
-<       "REQUEST_TIME_FLOAT" => 1642775290.6621
-<       "PATH_INFO" => ""
-<       "REQUEST_METHOD" => "GET"
-<       "REQUEST_URI" => "/1"
-<       "QUERY_STRING" => ""
-<     ]
-<   }
-<   +files: Symfony\Component\HttpFoundation\FileBag {
-<     #parameters: []
-<   }
-<   +cookies: Symfony\Component\HttpFoundation\InputBag {
-<     #parameters: []
----
->     SERVER_NAME: "localhost"
->     SERVER_PORT: 80
->     HTTP_HOST: "localhost"
->     HTTP_USER_AGENT: "Symfony"
->     HTTP_ACCEPT: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
->     HTTP_ACCEPT_LANGUAGE: "en-us,en;q=0.5"
->     HTTP_ACCEPT_CHARSET: "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
->     REMOTE_ADDR: "127.0.0.1"
->     SCRIPT_NAME: ""
->     SCRIPT_FILENAME: ""
->     SERVER_PROTOCOL: "HTTP/1.1"
->     REQUEST_TIME: 1642775290
->     REQUEST_TIME_FLOAT: 1642775290.6621
->     PATH_INFO: ""
->     REQUEST_METHOD: "GET"
->     REQUEST_URI: "/1"
->     QUERY_STRING: ""
-41a24,25
->   +files: Symfony\Component\HttpFoundation\FileBag {}
->   +cookies: Symfony\Component\HttpFoundation\InputBag {}
-43,59c27,31
-<     #headers: array:5 [
-<       "host" => array:1 [
-<         0 => "localhost"
-<       ]
-<       "user-agent" => array:1 [
-<         0 => "Symfony"
-<       ]
-<       "accept" => array:1 [
-<         0 => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-<       ]
-<       "accept-language" => array:1 [
-<         0 => "en-us,en;q=0.5"
-<       ]
-<       "accept-charset" => array:1 [
-<         0 => "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
-<       ]
-<     ]
----
->     host: "localhost"
->     user-agent: "Symfony"
->     accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
->     accept-language: "en-us,en;q=0.5"
->     accept-charset: "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
-62,74d33
-<   #content: null
-<   #languages: null
-<   #charsets: null
-<   #encodings: null
-<   #acceptableContentTypes: null
-<   #pathInfo: null
-<   #requestUri: null
-<   #baseUrl: null
-<   #basePath: null
-<   #method: null
-<   #format: null
-<   #session: null
-<   #locale: null
-76d34
-<   -preferredFormat: null
-79d36
-<   -isSafeContentPreferred: null
-82,83d38
-<   baseUrl: ""
-<   basePath: ""
-85a41
->    …40
+*** before	Fri Jan 21 09:43:34 2022
+--- after	Fri Jan 21 09:43:34 2022
+***************
+*** 1,86 ****
+  Illuminate\Http\Request {
+!   #json: null
+!   #convertedFiles: null
+!   #userResolver: null
+!   #routeResolver: null
+!   +attributes: Symfony\Component\HttpFoundation\ParameterBag {
+!     #parameters: []
+!   }
+!   +request: Symfony\Component\HttpFoundation\InputBag {
+!     #parameters: []
+!   }
+!   +query: Symfony\Component\HttpFoundation\InputBag {
+!     #parameters: []
+!   }
+    +server: Symfony\Component\HttpFoundation\ServerBag {
+!     #parameters: array:17 [
+!       "SERVER_NAME" => "localhost"
+!       "SERVER_PORT" => 80
+!       "HTTP_HOST" => "localhost"
+!       "HTTP_USER_AGENT" => "Symfony"
+!       "HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+!       "HTTP_ACCEPT_LANGUAGE" => "en-us,en;q=0.5"
+!       "HTTP_ACCEPT_CHARSET" => "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+!       "REMOTE_ADDR" => "127.0.0.1"
+!       "SCRIPT_NAME" => ""
+!       "SCRIPT_FILENAME" => ""
+!       "SERVER_PROTOCOL" => "HTTP/1.1"
+!       "REQUEST_TIME" => 1642776214
+!       "REQUEST_TIME_FLOAT" => 1642776214.4847
+!       "PATH_INFO" => ""
+!       "REQUEST_METHOD" => "GET"
+!       "REQUEST_URI" => "/1"
+!       "QUERY_STRING" => ""
+!     ]
+!   }
+!   +files: Symfony\Component\HttpFoundation\FileBag {
+!     #parameters: []
+!   }
+!   +cookies: Symfony\Component\HttpFoundation\InputBag {
+!     #parameters: []
+    }
+    +headers: Symfony\Component\HttpFoundation\HeaderBag {
+!     #headers: array:5 [
+!       "host" => array:1 [
+!         0 => "localhost"
+!       ]
+!       "user-agent" => array:1 [
+!         0 => "Symfony"
+!       ]
+!       "accept" => array:1 [
+!         0 => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+!       ]
+!       "accept-language" => array:1 [
+!         0 => "en-us,en;q=0.5"
+!       ]
+!       "accept-charset" => array:1 [
+!         0 => "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+!       ]
+!     ]
+      #cacheControl: []
+    }
+-   #content: null
+-   #languages: null
+-   #charsets: null
+-   #encodings: null
+-   #acceptableContentTypes: null
+-   #pathInfo: null
+-   #requestUri: null
+-   #baseUrl: null
+-   #basePath: null
+-   #method: null
+-   #format: null
+-   #session: null
+-   #locale: null
+    #defaultLocale: "en"
+-   -preferredFormat: null
+    -isHostValid: true
+    -isForwardedValid: true
+-   -isSafeContentPreferred: null
+    pathInfo: "/1"
+    requestUri: "/1"
+-   baseUrl: ""
+-   basePath: ""
+    method: "GET"
+    format: "html"
+  }
+--- 1,42 ----
+  Illuminate\Http\Request {
+!   +attributes: Symfony\Component\HttpFoundation\ParameterBag {}
+!   +request: Symfony\Component\HttpFoundation\InputBag {}
+!   +query: Symfony\Component\HttpFoundation\InputBag {}
+    +server: Symfony\Component\HttpFoundation\ServerBag {
+!     SERVER_NAME: "localhost"
+!     SERVER_PORT: 80
+!     HTTP_HOST: "localhost"
+!     HTTP_USER_AGENT: "Symfony"
+!     HTTP_ACCEPT: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+!     HTTP_ACCEPT_LANGUAGE: "en-us,en;q=0.5"
+!     HTTP_ACCEPT_CHARSET: "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+!     REMOTE_ADDR: "127.0.0.1"
+!     SCRIPT_NAME: ""
+!     SCRIPT_FILENAME: ""
+!     SERVER_PROTOCOL: "HTTP/1.1"
+!     REQUEST_TIME: 1642776214
+!     REQUEST_TIME_FLOAT: 1642776214.4847
+!     PATH_INFO: ""
+!     REQUEST_METHOD: "GET"
+!     REQUEST_URI: "/1"
+!     QUERY_STRING: ""
+    }
++   +files: Symfony\Component\HttpFoundation\FileBag {}
++   +cookies: Symfony\Component\HttpFoundation\InputBag {}
+    +headers: Symfony\Component\HttpFoundation\HeaderBag {
+!     host: "localhost"
+!     user-agent: "Symfony"
+!     accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+!     accept-language: "en-us,en;q=0.5"
+!     accept-charset: "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
+      #cacheControl: []
+    }
+    #defaultLocale: "en"
+    -isHostValid: true
+    -isForwardedValid: true
+    pathInfo: "/1"
+    requestUri: "/1"
+    method: "GET"
+    format: "html"
++    …40
+  }

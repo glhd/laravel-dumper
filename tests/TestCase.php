@@ -40,28 +40,29 @@ abstract class TestCase extends Orchestra
 		Caster::enable();
 		$after = $this->baseGetDump($data, $key, $filter);
 		
-		$this->writeDiff($before, $after);
+		$this->writeDiff($data, $before, $after);
 		
 		return $after;
 	}
 	
-	protected function writeDiff($before, $after)
+	protected function writeDiff($data, $before, $after)
 	{
 		$fs = new Filesystem();
+		$path = __DIR__.'/../diffs';
 		
 		[$_, $_, $_, $caller] = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 4);
 		$test_name = $caller['function'];
 		
-		$before_file = tempnam(sys_get_temp_dir(), $test_name.'1');
-		$after_file = tempnam(sys_get_temp_dir(), $test_name.'2');
+		$before_file = "{$path}/{$test_name}-before.txt";
+		$after_file = "{$path}/{$test_name}-after.txt";
 		
 		try {
-			$fs->put($before_file, $before);
-			$fs->put($after_file, $after);
+			$fs->put($before_file, "{$before}\n");
+			$fs->put($after_file, "{$after}\n");
 			
-			$diff = (new Process(['/usr/bin/diff', $before_file, $after_file]));
+			$diff = (new Process(['/usr/bin/diff', '-c', $before_file, $after_file]));
 			$diff->run();
-			$fs->put(__DIR__.'/../diffs/'.$test_name.'.diff', $diff->getOutput());
+			$fs->put("{$path}/{$test_name}.diff", str_replace([$before_file, $after_file], ['before', 'after'], $diff->getOutput()));
 		} finally {
 			$fs->delete([$before_file, $after_file]);
 		}
