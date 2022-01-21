@@ -5,7 +5,7 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
-## [0.3.0]
+## [0.3.1]
 
 ### Added
 
