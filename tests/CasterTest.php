@@ -6,13 +6,10 @@ use Carbon\Carbon;
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
 class CasterTest extends TestCase
 {
-	use VarDumperTestTrait;
-	
-	public function test_it_casts_carbon_instances(): void
+	public function test_carbon_date(): void
 	{
 		$now = Carbon::parse('2022-01-18 19:44:02.572622', 'America/New_York');
 		
@@ -34,7 +31,7 @@ class CasterTest extends TestCase
 		$this->assertDumpMatchesFormat($expected, $now);
 	}
 	
-	public function test_it_cuts_most_internals_from_a_container(): void
+	public function test_container(): void
 	{
 		$container = new Container();
 		
@@ -81,7 +78,7 @@ class CasterTest extends TestCase
 		$this->assertDumpMatchesFormat($expected, $container);
 	}
 	
-	public function test_it_cuts_all_internals_from_a_nested_container(): void
+	public function test_container_nested(): void
 	{
 		$container = new Container();
 		
@@ -94,7 +91,7 @@ class CasterTest extends TestCase
 		$this->assertDumpMatchesFormat($expected, [$container]);
 	}
 	
-	public function test_it_dumps_a_request(): void
+	public function test_request(): void
 	{
 		$request = Request::create('/1');
 		
@@ -146,7 +143,7 @@ class CasterTest extends TestCase
 		$this->assertDumpMatchesFormat($expected, $request);
 	}
 	
-	public function test_it_dumps_a_response(): void
+	public function test_response(): void
 	{
 		$response = new Response('Hello world.');
 		

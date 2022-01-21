@@ -1,0 +1,112 @@
+--- Before	2022-01-21 10:11:53.000000000 -0500
++++ After	2022-01-21 10:11:53.000000000 -0500
+@@ -1,25 +1,28 @@
+ Glhd\LaravelDumper\Tests\User {
+-  #guarded: []
+-  #connection: "testing"
+-  #table: "users"
+-  #primaryKey: "id"
+-  #keyType: "int"
+-  +incrementing: true
+-  #with: []
+-  #withCount: []
+-  +preventsLazyLoading: false
+-  #perPage: 15
++  +"id": 1
++  +"company_id": 1
++  +"email": "foo@bar.com"
++  +"name": "Chris"
++  +"created_at": "2022-01-21 10:11:53"
++  +"updated_at": "2022-01-21 10:11:53"
++  isDirty(): true
+   +exists: true
+   +wasRecentlyCreated: true
+-  #escapeWhenCastingToString: false
+-  #attributes: array:6 [
+-    "name" => "Chris"
+-    "email" => "foo@bar.com"
+-    "company_id" => 1
+-    "updated_at" => "2022-01-21 10:11:53"
+-    "created_at" => "2022-01-21 10:11:53"
+-    "id" => 1
++  #relations: array:1 [
++    "company" => Glhd\LaravelDumper\Tests\Company {
++      +"id": 1
++      +"name": "Galahad"
++      +"created_at": "2022-01-21 10:11:53"
++      +"updated_at": "2022-01-21 10:11:53"
++      isDirty(): false
++      +exists: true
++      +wasRecentlyCreated: true
++      #relations: []
++       …27
++    }
+   ]
++  #connection: "testing"
++  #table: "users"
+   #original: array:6 [
+     "name" => "John"
+     "email" => "foo@bar.com"
+@@ -29,61 +32,5 @@
+     "id" => 1
+   ]
+   #changes: []
+-  #casts: []
+-  #classCastCache: []
+-  #attributeCastCache: []
+-  #dates: []
+-  #dateFormat: null
+-  #appends: []
+-  #dispatchesEvents: []
+-  #observables: []
+-  #relations: array:1 [
+-    "company" => Glhd\LaravelDumper\Tests\Company {
+-      #guarded: []
+-      #connection: "testing"
+-      #table: "companies"
+-      #primaryKey: "id"
+-      #keyType: "int"
+-      +incrementing: true
+-      #with: []
+-      #withCount: []
+-      +preventsLazyLoading: false
+-      #perPage: 15
+-      +exists: true
+-      +wasRecentlyCreated: true
+-      #escapeWhenCastingToString: false
+-      #attributes: array:4 [
+-        "name" => "Galahad"
+-        "updated_at" => "2022-01-21 10:11:53"
+-        "created_at" => "2022-01-21 10:11:53"
+-        "id" => 1
+-      ]
+-      #original: array:4 [
+-        "name" => "Galahad"
+-        "updated_at" => "2022-01-21 10:11:53"
+-        "created_at" => "2022-01-21 10:11:53"
+-        "id" => 1
+-      ]
+-      #changes: []
+-      #casts: []
+-      #classCastCache: []
+-      #attributeCastCache: []
+-      #dates: []
+-      #dateFormat: null
+-      #appends: []
+-      #dispatchesEvents: []
+-      #observables: []
+-      #relations: []
+-      #touches: []
+-      +timestamps: true
+-      #hidden: []
+-      #visible: []
+-      #fillable: []
+-    }
+-  ]
+-  #touches: []
+-  +timestamps: true
+-  #hidden: []
+-  #visible: []
+-  #fillable: []
++   …23
+ }

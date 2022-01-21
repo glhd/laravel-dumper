@@ -1,0 +1,35 @@
+--- Before	2022-01-21 10:11:53.000000000 -0500
++++ After	2022-01-21 10:11:53.000000000 -0500
+@@ -1,29 +1,13 @@
+ Illuminate\Http\Response {
+   +headers: Symfony\Component\HttpFoundation\ResponseHeaderBag {
+-    #computedCacheControl: array:2 [
+-      "no-cache" => true
+-      "private" => true
+-    ]
+-    #cookies: []
+-    #headerNames: array:2 [
+-      "cache-control" => "Cache-Control"
+-      "date" => "Date"
+-    ]
+-    #headers: array:2 [
+-      "cache-control" => array:1 [
+-        0 => "no-cache, private"
+-      ]
+-      "date" => array:1 [
+-        0 => "Fri, 21 Jan 2022 15:11:53 GMT"
+-      ]
+-    ]
++    cache-control: "no-cache, private"
++    date: "Fri, 21 Jan 2022 15:11:53 GMT"
+     #cacheControl: []
+   }
+   #content: "Hello world."
+   #version: "1.0"
+   #statusCode: 200
+   #statusText: "OK"
+-  #charset: null
+   +original: "Hello world."
+-  +exception: null
++   …2
+ }
