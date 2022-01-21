@@ -1,6 +1,6 @@
---- Before	2022-01-21 10:07:07.000000000 -0500
-+++ After	2022-01-21 10:07:07.000000000 -0500
-@@ -1,11214 +1,10 @@
+--- Before	2022-01-21 10:11:53.000000000 -0500
++++ After	2022-01-21 10:11:53.000000000 -0500
+@@ -1,11217 +1,10 @@
  Illuminate\Database\Query\Builder {
 -  +connection: Illuminate\Database\SQLiteConnection {
 -    #pdo: PDO {
@@ -2315,7 +2315,7 @@
 -                            "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_formats_very_long_sql" => 3
 -                            "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_request" => 4
 -                          ]
--                          -times: array:22 [
+-                          -times: array:25 [
 -                            "Glhd\LaravelDumper\Tests\LaravelCastsTest::test_it_cuts_the_internals_from_the_container" => 0.103
 -                            "Glhd\LaravelDumper\Tests\LaravelCastsTest::test_it_cuts_most_internals_from_a_container" => 0.06
 -                            "Glhd\LaravelDumper\Tests\ModelCastTest::test_model" => 0.146
@@ -2332,12 +2332,15 @@
 -                            "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_response" => 0.024
 -                            "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_it_formats_very_long_sql" => 0.138
 -                            "Glhd\LaravelDumper\Tests\CasterTest::test_it_dumps_a_request" => 0.025
--                            "Glhd\LaravelDumper\Tests\CasterTest::test_carbon_date" => 0.069
--                            "Glhd\LaravelDumper\Tests\CasterTest::test_container" => 0.025
--                            "Glhd\LaravelDumper\Tests\CasterTest::test_container_nested" => 0.022
+-                            "Glhd\LaravelDumper\Tests\CasterTest::test_carbon_date" => 0.067
+-                            "Glhd\LaravelDumper\Tests\CasterTest::test_container" => 0.023
+-                            "Glhd\LaravelDumper\Tests\CasterTest::test_container_nested" => 0.021
 -                            "Glhd\LaravelDumper\Tests\CasterTest::test_request" => 0.024
--                            "Glhd\LaravelDumper\Tests\CasterTest::test_response" => 0.024
+-                            "Glhd\LaravelDumper\Tests\CasterTest::test_response" => 0.023
 -                            "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_eloquent_model" => 0.109
+-                            "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_query_builder" => 0.039
+-                            "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_eloquent_builder" => 0.039
+-                            "Glhd\LaravelDumper\Tests\DatabaseCasterTest::test_eloquent_relation" => 0.042
 -                          ]
 -                        }
 -                      }
@@ -2360,7 +2363,7 @@
 -                    -defectListPrinted: false
 -                    -timer: SebastianBergmann\Timer\Timer {
 -                      -startTimes: array:1 [
--                        0 => 64249943867536.0
+-                        0 => 64535660256965.0
 -                      ]
 -                    }
 -                    -stream: null
@@ -2368,7 +2371,7 @@
 -                  }
 -                ]
 -                -runTests: 7
--                -time: 0.271815051
+-                -time: 0.266152861
 -                -codeCoverage: null
 -                -convertDeprecationsToExceptions: false
 -                -convertErrorsToExceptions: true
@@ -3055,8 +3058,8 @@
 -                "SCRIPT_NAME" => "vendor/bin/phpunit"
 -                "SCRIPT_FILENAME" => "vendor/bin/phpunit"
 -                "SERVER_PROTOCOL" => "HTTP/1.1"
--                "REQUEST_TIME" => 1642777627
--                "REQUEST_TIME_FLOAT" => 1642777627.2092
+-                "REQUEST_TIME" => 1642777912
+-                "REQUEST_TIME_FLOAT" => 1642777912.922
 -                "WRITE_DIFFS" => "1"
 -                "TERM_PROGRAM" => "iTerm.app"
 -                "PHP_BINARY" => "/usr/local/Cellar/php@7.4/7.4.26_1.reinstall/bin/php"
@@ -3065,7 +3068,7 @@
 -                "SHELL" => "/bin/zsh"
 -                "TMPDIR" => "/var/folders/wq/7r254byn65xbhgpsfn__xcl00000gn/T/"
 -                "TERM_PROGRAM_VERSION" => "3.5.0beta4"
--                "XDEBUG_HANDLER_SETTINGS" => "/private/var/folders/wq/7r254byn65xbhgpsfn__xcl00000gn/T/ERfe1t|1|*|*|/usr/local/etc/php/7.4/php.ini:/usr/local/etc/php/7.4/conf.d/error_log.ini:/usr/local/etc/php/7.4/conf.d/ext-imagick.ini:/usr/local/etc/php/7.4/conf.d/ext-opcache.ini:/usr/local/etc/php/7.4/conf.d/ext-xdebug.ini:/usr/local/etc/php/7.4/conf.d/php-memory-limits.ini|2.9.6"
+-                "XDEBUG_HANDLER_SETTINGS" => "/private/var/folders/wq/7r254byn65xbhgpsfn__xcl00000gn/T/rXInRP|1|*|*|/usr/local/etc/php/7.4/php.ini:/usr/local/etc/php/7.4/conf.d/error_log.ini:/usr/local/etc/php/7.4/conf.d/ext-imagick.ini:/usr/local/etc/php/7.4/conf.d/ext-opcache.ini:/usr/local/etc/php/7.4/conf.d/ext-xdebug.ini:/usr/local/etc/php/7.4/conf.d/php-memory-limits.ini|2.9.6"
 -                "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" => "fg=240"
 -                "TERM_SESSION_ID" => "w0t0p0:CCB91CBF-8B4F-4D42-A80C-5604BE31C02A"
 -                "ZSH" => "/Users/inxilpro/.oh-my-zsh"
@@ -5760,10 +5763,10 @@
 -                  #name: "schedule:run"
 -                  #description: "Run the scheduled commands"
 -                  #schedule: null
--                  #startedAt: Illuminate\Support\Carbon @1642777627 {
+-                  #startedAt: Illuminate\Support\Carbon @1642777913 {
 -                    #endOfTime: false
 -                    #startOfTime: false
--                    #constructedObjectId: "000000007b737eb300000000479fb1ca"
+-                    #constructedObjectId: "000000002366a9de000000002f03d026"
 -                    #localMonthsOverflow: null
 -                    #localYearsOverflow: null
 -                    #localStrictModeEnabled: null
@@ -5781,7 +5784,7 @@
 -                    ]
 -                    #dumpLocale: null
 -                    #dumpDateProperties: null
--                    date: 2022-01-21 10:07:07.548737 America/New_York (-05:00)
+-                    date: 2022-01-21 10:11:53.253927 America/New_York (-05:00)
 -                  }
 -                  #eventsRan: false
 -                  #dispatcher: null
