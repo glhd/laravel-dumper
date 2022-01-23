@@ -62,15 +62,17 @@ do a "full" dump with `ddf()` and `dumpf()`.
 ## Comparison to Default Output
 
 You can see comparisons between the default `dd()` output and the `laravel-dumper` output
-in the [diffs directory of this repository](/diffs/).
+in the [diffs directory of this repository](./diffs/).
 
 ## Custom Casters
 
 If there are objects in your project that you would like to customize the `dd()` behavior
-for, you can register custom casters with the `LaravelDumper` facade:
+for, you can register custom casters using the `CustomCaster` class:
 
 ```php
-LaravelDumper::for(User::class)
+use Glhd\LaravelDumper\Casters\CustomCaster;
+
+CustomCaster::for(User::class)
     ->only(['attributes', 'exists', 'wasRecentlyCreated']) // Props to keep (or use `except` to exclude)
     ->virtual('admin', fn(User $user) => $user->isAdmin()) // Add virtual props
     ->filter() // Filter out empty/null props (accepts callback)
@@ -105,4 +107,4 @@ This gives you the same level of control over the `dd()` output as the core Symf
 VarDumper package, but is more complex to implement.
 
 Your custom casters should extend `Glhd\LaravelDumper\Casters\Caster` and implement the
-`cast` method. See any of our [built-in casters](/src/Casters/) for more details.
+`cast` method. See any of our [built-in casters](./src/Casters/) for more details.

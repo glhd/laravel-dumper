@@ -2,6 +2,7 @@
 
 namespace Glhd\LaravelDumper\Casters;
 
+use Closure;
 use Glhd\LaravelDumper\Support\Properties;
 use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\VarDumper\Cloner\AbstractCloner;
@@ -11,19 +12,28 @@ abstract class Caster
 {
 	public static array $targets = [];
 	
-	public static bool $enabled = true;
+	protected static bool $enabled = true;
 	
 	public static function register(Application $app): void
 	{
 		$app->singleton(static::class);
 		
 		foreach (static::$targets as $target) {
-			AbstractCloner::$defaultCasters[$target] = static function($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0) {
-				return self::$enabled
-					? app(static::class)->cast($target, new Properties($properties), $stub, $is_nested, $filter)
-					: $properties;
-			};
+			AbstractCloner::$defaultCasters[$target] = self::callback(static::class);
 		}
+	}
+	
+	public static function callback($caster): Closure
+	{
+		return static function($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0) use ($caster) {
+			$instance = $caster instanceof Caster
+				? $caster
+				: app($caster);
+			
+			return self::$enabled
+				? $instance->cast($target, new Properties($properties), $stub, $is_nested, $filter)
+				: $properties;
+		};
 	}
 	
 	public static function disable(): void

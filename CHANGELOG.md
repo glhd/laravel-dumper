@@ -5,6 +5,10 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Changed
+
+- Removed the `LaravelDumper` facade in favor of registering custom casters directly
+
 ## [0.4.0]
 
 ### Added

@@ -6,11 +6,21 @@ use BadMethodCallException;
 use Closure;
 use Glhd\LaravelDumper\Support\Properties;
 use Illuminate\Contracts\Foundation\Application;
+use Symfony\Component\VarDumper\Cloner\AbstractCloner;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
 class CustomCaster extends Caster
 {
 	protected array $operations = [];
+	
+	public function for(string $class_name): CustomCaster
+	{
+		$caster = new self();
+		
+		AbstractCloner::$defaultCasters[$class_name] = Caster::callback($caster);
+		
+		return $caster;
+	}
 	
 	public static function register(Application $app): void
 	{

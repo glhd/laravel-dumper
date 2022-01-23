@@ -2,63 +2,38 @@
 
 namespace Glhd\LaravelDumper;
 
-use Glhd\LaravelDumper\Casters\BuilderCaster;
-use Glhd\LaravelDumper\Casters\CarbonCaster;
-use Glhd\LaravelDumper\Casters\ContainerCaster;
-use Glhd\LaravelDumper\Casters\DatabaseConnectionCaster;
-use Glhd\LaravelDumper\Casters\HeaderBagCaster;
-use Glhd\LaravelDumper\Casters\ModelCaster;
-use Glhd\LaravelDumper\Casters\ParameterBagCaster;
-use Glhd\LaravelDumper\Casters\RequestCaster;
-use Glhd\LaravelDumper\Casters\ResponseCaster;
-use Glhd\LaravelDumper\Support\CustomDumperRegistrar;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelDumperServiceProvider extends ServiceProvider
 {
 	protected array $casters = [
-		ContainerCaster::class,
-		ModelCaster::class,
-		BuilderCaster::class,
-		DatabaseConnectionCaster::class,
-		CarbonCaster::class,
-		RequestCaster::class,
-		ParameterBagCaster::class,
-		HeaderBagCaster::class,
-		ResponseCaster::class,
+		Casters\ContainerCaster::class,
+		Casters\ModelCaster::class,
+		Casters\BuilderCaster::class,
+		Casters\DatabaseConnectionCaster::class,
+		Casters\CarbonCaster::class,
+		Casters\RequestCaster::class,
+		Casters\ParameterBagCaster::class,
+		Casters\HeaderBagCaster::class,
+		Casters\ResponseCaster::class,
 	];
-	
-	protected string $base_dir;
-	
-	public function __construct($app)
-	{
-		parent::__construct($app);
-		
-		$this->base_dir = dirname(__DIR__);
-	}
 	
 	public function register()
 	{
-		$this->mergeConfigFrom("{$this->base_dir}/config.php", 'laravel-dumper');
+		$this->mergeConfigFrom($this->packageConfigFile(), 'laravel-dumper');
 		
-		if (!$this->isEnabledInCurrentEnvironment()) {
-			return;
+		if ($this->isEnabledInCurrentEnvironment()) {
+			require_once __DIR__.DIRECTORY_SEPARATOR.'helpers.php';
+			
+			$this->registerCasters();
 		}
-		
-		require_once __DIR__.'/helpers.php';
-		
-		$this->registerCasters();
-		
-		$this->app->singleton(CustomDumperRegistrar::class);
 	}
 	
 	public function boot()
 	{
-		if (method_exists($this->app, 'configPath')) {
-			$this->publishes([
-				"{$this->base_dir}/config.php" => $this->app->configPath('laravel-dumper.php'),
-			], ['laravel-dumper', 'laravel-dumper-config']);
-		}
+		$this->publishes([
+			$this->packageConfigFile() => $this->app->configPath('laravel-dumper.php'),
+		], ['laravel-dumper', 'laravel-dumper-config']);
 	}
 	
 	protected function isEnabledInCurrentEnvironment(): bool
@@ -75,5 +50,10 @@ class LaravelDumperServiceProvider extends ServiceProvider
 		foreach ($casters as $caster) {
 			$caster::register($this->app);
 		}
+	}
+	
+	protected function packageConfigFile(): string
+	{
+		return dirname(__DIR__).DIRECTORY_SEPARATOR.'config.php';
 	}
 }

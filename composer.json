@@ -44,10 +44,7 @@
     "laravel": {
       "providers": [
         "Glhd\\LaravelDumper\\LaravelDumperServiceProvider"
-      ],
-      "aliases": {
-        "LaravelDumper": "Glhd\\LaravelDumper\\Facades\\LaravelDumper"
-      }
+      ]
     }
   },
   "minimum-stability": "dev",
