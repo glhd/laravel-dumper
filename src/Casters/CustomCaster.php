@@ -13,7 +13,7 @@ class CustomCaster extends Caster
 {
 	protected array $operations = [];
 	
-	public function for(string $class_name): CustomCaster
+	public static function for(string $class_name): CustomCaster
 	{
 		$caster = new self();
 		
