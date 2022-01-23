@@ -8,3 +8,7 @@ exclude_patterns:
   - "bin/"
   - "diffs/"
   - "*.md"
+  - ".*.yml"
+  - "LICENSE"
+  - "composer.json"
+  - "phpunit.xml"
