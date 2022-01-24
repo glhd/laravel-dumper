@@ -18,11 +18,22 @@ abstract class TestCase extends Orchestra
 	
 	protected bool $write_diff_if_configured = true;
 	
+	protected int $diff_count = 0;
+	
 	protected function setUp(): void
 	{
 		parent::setUp();
 		
 		Caster::enable();
+		$this->write_diff_if_configured = true;
+		$this->diff_count = 0;
+	}
+	
+	protected function withoutWritingDiffs(): self
+	{
+		$this->write_diff_if_configured = false;
+		
+		return $this;
 	}
 	
 	protected function getPackageProviders($app)
@@ -65,6 +76,11 @@ abstract class TestCase extends Orchestra
 		
 		[$_, $_, $_, $caller] = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 4);
 		$name = Str::of($caller['function'])->after('test_')->replace('_', '-');
+		
+		$this->diff_count++;
+		if ($this->diff_count > 1) {
+			$name .= "-{$this->diff_count}";
+		}
 		
 		$before_file = "{$path}/{$name}.1.txt";
 		$after_file = "{$path}/{$name}.2.txt";

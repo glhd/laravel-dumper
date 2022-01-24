@@ -1,0 +1,7 @@
+--- Before	2022-01-24 09:44:05.000000000 -0500
++++ After	2022-01-24 09:44:05.000000000 -0500
+@@ -1,3 +1,3 @@
+ Glhd\LaravelDumper\Tests\MyOtherCustomObject {
+-  #bar: "bar"
++  foo: "bar"
+ }

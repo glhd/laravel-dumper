@@ -1,0 +1,12 @@
+--- Before	2022-01-24 09:44:05.000000000 -0500
++++ After	2022-01-24 09:44:05.000000000 -0500
+@@ -1,6 +1,6 @@
+ Glhd\LaravelDumper\Tests\MyCustomObject {
++  +"dyn": "this is a dynamic prop"
+   #foo: "foo"
+-  #bar: "bar"
+-  #nothing: null
+-  #nah: []
++  virt: "this is a virtual prop"
++   …1
+ }

@@ -35,27 +35,23 @@ class CasterTest extends TestCase
 	
 	public function test_package_can_be_disabled(): void
 	{
-		$this->write_diff_if_configured = false;
+		$this->withoutWritingDiffs();
 		
-		try {
-			CustomCaster::for(static::class)
-				->only([])
-				->virtual('foo', fn() => 'bar');
-			
-			$getLineCount = fn() => substr_count($this->getDump($this), "\n") + 1;
-			
-			$this->assertEquals(4, $getLineCount());
-			
-			Caster::disable();
-			
-			$this->assertGreaterThan(100, $getLineCount());
-			
-			Caster::enable();
-			
-			$this->assertEquals(4, $getLineCount());
-		} finally {
-			$this->write_diff_if_configured = true;
-		}
+		CustomCaster::for(static::class)
+			->only([])
+			->virtual('foo', fn() => 'bar');
+		
+		$getLineCount = fn() => substr_count($this->getDump($this), "\n") + 1;
+		
+		$this->assertEquals(4, $getLineCount());
+		
+		Caster::disable();
+		
+		$this->assertGreaterThan(100, $getLineCount());
+		
+		Caster::enable();
+		
+		$this->assertEquals(4, $getLineCount());
 	}
 	
 	public function test_container(): void
