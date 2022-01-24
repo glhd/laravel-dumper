@@ -3,6 +3,8 @@
 namespace Glhd\LaravelDumper\Tests;
 
 use Carbon\Carbon;
+use Glhd\LaravelDumper\Casters\Caster;
+use Glhd\LaravelDumper\Casters\CustomCaster;
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -29,6 +31,25 @@ class CasterTest extends TestCase
 		EOD;
 		
 		$this->assertDumpMatchesFormat($expected, $now);
+	}
+	
+	public function test_package_can_be_disabled(): void
+	{
+		CustomCaster::for(static::class)
+			->only([])
+			->virtual('foo', fn() => 'bar');
+		
+		$getLineCount = fn() => substr_count($this->getDump($this), "\n") + 1;
+		
+		$this->assertEquals(4, $getLineCount());
+		
+		Caster::disable();
+		
+		$this->assertGreaterThan(100, $getLineCount());
+		
+		Caster::enable();
+		
+		$this->assertEquals(4, $getLineCount());
 	}
 	
 	public function test_container(): void

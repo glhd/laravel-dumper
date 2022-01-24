@@ -4,6 +4,8 @@ namespace Glhd\LaravelDumper\Tests;
 
 use Glhd\LaravelDumper\Support\Key;
 use Glhd\LaravelDumper\Support\Properties;
+use Illuminate\Support\Collection;
+use Symfony\Component\VarDumper\Caster\CutStub;
 
 class PropertiesTest extends TestCase
 {
@@ -79,10 +81,94 @@ class PropertiesTest extends TestCase
 		$this->assertTrue($this->parameters->has('protected'));
 		$this->assertTrue($this->parameters->has(Key::protected('protected')));
 		$this->assertTrue($this->parameters->has(Key::protected('protected'), 'prefix_b'));
+		$this->assertTrue($this->parameters->has([Key::protected('protected'), 'prefix_b']));
 		
 		$this->assertFalse($this->parameters->has(Key::virtual('protected')));
 		$this->assertFalse($this->parameters->has(Key::protected('protected'), 'foo'));
+		$this->assertFalse($this->parameters->has([Key::protected('protected'), 'foo']));
 		
 		$this->assertTrue($this->parameters->hasAny(Key::protected('protected'), 'foo'));
+		$this->assertTrue($this->parameters->hasAny([Key::protected('protected'), 'foo']));
+	}
+	
+	public function test_get_methods(): void
+	{
+		$this->assertEquals(1, $this->parameters->getProtected('protected'));
+		$this->assertNull($this->parameters->getProtected('virtual'));
+		
+		$this->assertEquals(1, $this->parameters->getVirtual('virtual'));
+		$this->assertNull($this->parameters->getVirtual('protected'));
+		
+		$this->assertEquals(1, $this->parameters->getDynamic('dynamic'));
+		$this->assertNull($this->parameters->getDynamic('protected'));
+		
+		$this->assertEquals(1, $this->parameters->get('protected'));
+		$this->assertEquals(1, $this->parameters->get('virtual'));
+		$this->assertEquals(1, $this->parameters->get('dynamic'));
+		$this->assertEquals(1, $this->parameters->get('prefix_b'));
+		$this->assertNull($this->parameters->get('missing param'));
+	}
+	
+	public function test_cut_methods(): void
+	{
+		$this->assertEquals(1, $this->parameters->cutProtected('protected')->value);
+		$this->assertNull($this->parameters->cutProtected('virtual')->value);
+		
+		$this->assertEquals(1, $this->parameters->cutVirtual('virtual')->value);
+		$this->assertNull($this->parameters->cutVirtual('protected')->value);
+		
+		$this->assertEquals(1, $this->parameters->cutDynamic('dynamic')->value);
+		$this->assertNull($this->parameters->cutDynamic('protected')->value);
+		
+		$this->assertEquals(1, $this->parameters->cut('protected')->value);
+		$this->assertEquals(1, $this->parameters->cut('virtual')->value);
+		$this->assertEquals(1, $this->parameters->cut('dynamic')->value);
+		$this->assertEquals(1, $this->parameters->cut('prefix_b')->value);
+		$this->assertNull($this->parameters->cut('missing param')->value);
+	}
+	
+	public function test_copy_methods(): void
+	{
+		$destination = new Properties();
+		
+		$destination->copyProtected('protected', $this->parameters);
+		$destination->copyVirtual('virtual', $this->parameters);
+		$destination->copyDynamic('dynamic', $this->parameters);
+		$destination->copy('prefix_b', $this->parameters);
+		
+		$this->assertEquals(1, $destination->get('protected'));
+		$this->assertEquals(1, $destination->get('virtual'));
+		$this->assertEquals(1, $destination->get('dynamic'));
+		$this->assertEquals(1, $destination->get('prefix_b'));
+	}
+	
+	public function test_copy_and_cut_methods(): void
+	{
+		$destination = new Properties();
+		
+		$destination->copyAndCutProtected('protected', $this->parameters);
+		$destination->copyAndCutVirtual('virtual', $this->parameters);
+		$destination->copyAndCutDynamic('dynamic', $this->parameters);
+		
+		$this->assertInstanceOf(CutStub::class, $destination->get('protected'));
+		$this->assertInstanceOf(CutStub::class, $destination->get('virtual'));
+		$this->assertInstanceOf(CutStub::class, $destination->get('dynamic'));
+		
+		$this->assertEquals(1, $destination->get('protected')->value);
+		$this->assertEquals(1, $destination->get('virtual')->value);
+		$this->assertEquals(1, $destination->get('dynamic')->value);
+	}
+	
+	public function test_default_filtering(): void
+	{
+		$properties = new Properties([
+			'null' => null,
+			'empty array' => [],
+			'empty collection' => new Collection(),
+			'false' => false,
+			'value' => 1,
+		]);
+		
+		$this->assertEquals(['false' => false, 'value' => 1], $properties->filter()->all());
 	}
 }
