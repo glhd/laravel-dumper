@@ -16,6 +16,15 @@ abstract class TestCase extends Orchestra
 		getDump as baseGetDump;
 	}
 	
+	protected bool $write_diff_if_configured = true;
+	
+	protected function setUp(): void
+	{
+		parent::setUp();
+		
+		Caster::enable();
+	}
+	
 	protected function getPackageProviders($app)
 	{
 		return [
@@ -30,7 +39,7 @@ abstract class TestCase extends Orchestra
 	
 	protected function getDump($data, $key = null, int $filter = 0): ?string
 	{
-		if ('1' !== getenv('WRITE_DIFFS')) {
+		if (!$this->write_diff_if_configured || '1' !== getenv('WRITE_DIFFS')) {
 			return $this->baseGetDump($data, $key, $filter);
 		}
 		
@@ -47,6 +56,10 @@ abstract class TestCase extends Orchestra
 	
 	protected function writeDiff($before, $after)
 	{
+		if ($before === $after) {
+			return;
+		}
+		
 		$fs = new Filesystem();
 		$path = __DIR__.'/../diffs';
 		

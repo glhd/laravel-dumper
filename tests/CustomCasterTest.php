@@ -2,6 +2,7 @@
 
 namespace Glhd\LaravelDumper\Tests;
 
+use BadMethodCallException;
 use Glhd\LaravelDumper\Casters\CustomCaster;
 
 class CustomCasterTest extends TestCase
@@ -16,6 +17,7 @@ class CustomCasterTest extends TestCase
 			->reorder(['dyn', 'foo']);
 		
 		CustomCaster::for(MyOtherCustomObject::class)
+			->except('bar')
 			->virtual('foo', fn() => 'bar');
 		
 		$expected = <<<EOD
@@ -37,6 +39,13 @@ class CustomCasterTest extends TestCase
 		
 		$this->assertDumpEquals($expected, new MyOtherCustomObject());
 	}
+	
+	public function test_custom_casters_cannot_be_registered(): void
+	{
+		$this->expectException(BadMethodCallException::class);
+		
+		CustomCaster::register($this->app);
+	}
 }
 
 class MyCustomObject
@@ -52,4 +61,5 @@ class MyCustomObject
 
 class MyOtherCustomObject
 {
+	protected $bar = 'bar';
 }

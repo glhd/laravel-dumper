@@ -2,6 +2,8 @@
 
 namespace Glhd\LaravelDumper\Tests;
 
+use Closure;
+use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Date;
@@ -138,6 +140,100 @@ class DatabaseCasterTest extends TestCase
 		EOD;
 		
 		$this->assertDumpMatchesFormat($expected, $user->company());
+	}
+	
+	public function test_unexpected_database_connections(): void
+	{
+		// Database connections don't necessarily need to have a $config
+		// array. If they don't, we just return the original.
+		
+		$conn = new class() implements ConnectionInterface {
+			public $foo = 'bar';
+			
+			public function table($table, $as = null)
+			{
+			}
+			
+			public function raw($value)
+			{
+			}
+			
+			public function selectOne($query, $bindings = [], $useReadPdo = true)
+			{
+			}
+			
+			public function select($query, $bindings = [], $useReadPdo = true)
+			{
+			}
+			
+			public function cursor($query, $bindings = [], $useReadPdo = true)
+			{
+			}
+			
+			public function insert($query, $bindings = [])
+			{
+			}
+			
+			public function update($query, $bindings = [])
+			{
+			}
+			
+			public function delete($query, $bindings = [])
+			{
+			}
+			
+			public function statement($query, $bindings = [])
+			{
+			}
+			
+			public function affectingStatement($query, $bindings = [])
+			{
+			}
+			
+			public function unprepared($query)
+			{
+			}
+			
+			public function prepareBindings(array $bindings)
+			{
+			}
+			
+			public function transaction(Closure $callback, $attempts = 1)
+			{
+			}
+			
+			public function beginTransaction()
+			{
+			}
+			
+			public function commit()
+			{
+			}
+			
+			public function rollBack()
+			{
+			}
+			
+			public function transactionLevel()
+			{
+			}
+			
+			public function pretend(Closure $callback)
+			{
+			}
+			
+			public function getDatabaseName()
+			{
+			}
+		};
+		
+		$expected = <<<EOD
+		Illuminate\Database\ConnectionInterface@anonymous {
+		  +foo: "bar"
+		}
+		EOD;
+		
+		$this->assertDumpEquals($expected, $conn);
 	}
 	
 	protected function defineDatabaseMigrations()
