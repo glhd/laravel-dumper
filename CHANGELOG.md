@@ -5,6 +5,8 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [1.0.0] - 2022-01-24
+
 ## [0.5.0] - 2022-01-23
 
 ### Changed
@@ -63,7 +65,9 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 -   `Fixed` for any bug fixes. 
 -   `Security` in case of vulnerabilities.
 
-[Unreleased]: https://github.com/glhd/laravel-dumper/compare/0.5.0...HEAD
+[Unreleased]: https://github.com/glhd/laravel-dumper/compare/1.0.0...HEAD
+
+[1.0.0]: https://github.com/glhd/laravel-dumper/compare/0.5.0...1.0.0
 
 [0.5.0]: https://github.com/glhd/laravel-dumper/compare/0.4.0...0.5.0
 
