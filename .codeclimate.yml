@@ -12,3 +12,4 @@ exclude_patterns:
   - "LICENSE"
   - "composer.json"
   - "phpunit.xml"
+  - "src/helpers.php"
