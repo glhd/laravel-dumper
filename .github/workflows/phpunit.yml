@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 14 * * 3' # Run Wednesdays at 2pm EST
 
 jobs:
   php-tests:
