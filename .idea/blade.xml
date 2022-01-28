@@ -11,7 +11,7 @@
       <data directive="@cannot" injection="true" prefix="&lt;?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)-&gt;denies(" suffix=")): ?&gt;" />
       <data directive="@case" injection="true" prefix="&lt;?php case (" suffix="): ?&gt;" />
       <data directive="@choice" injection="true" prefix="&lt;?php echo app('translator')-&gt;choice(" suffix="); ?&gt;" />
-      <data directive="@class" injection="true" prefix="class=&quot;&lt;?php echo \Illuminate\Support\Arr::toCssClasses(" suffix=") ?&gt;&quot;" />
+      <data directive="@class" injection="true" prefix="class=&quot;&lt;?php echo \Illuminate\Support\Arr::toCssClasses(" suffix=")?&gt;&quot;" />
       <data directive="@component" injection="true" prefix="&lt;?php $__env-&gt;startComponent(" suffix="); ?&gt;" />
       <data directive="@componentfirst" injection="true" prefix="&lt;?php $__env-&gt;startComponentFirst(" suffix="); ?&gt;" />
       <data directive="@continue" injection="true" prefix="&lt;?php if(" suffix=") continue; ?&gt;" />

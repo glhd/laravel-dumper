@@ -7,7 +7,7 @@
 	</a>
 	<a href="https://codeclimate.com/github/glhd/laravel-dumper/test_coverage" target="_blank">
 		<img 
-			src="https://api.codeclimate.com/v1/badges/f597a6e8d9f968a55f03/test_coverage" 
+			src="https://api.codeclimate.com/v1/badges/89d825bd1cba002b271c/test_coverage" 
 			alt="Coverage Status" 
 		/>
 	</a>
