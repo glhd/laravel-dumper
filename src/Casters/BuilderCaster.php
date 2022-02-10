@@ -52,7 +52,9 @@ class BuilderCaster extends Caster
 	protected function formatSql($sql, $bindings): string
 	{
 		$bindings = Arr::flatten($bindings);
-		$merged = preg_replace_callback('/\?/', fn() => DB::getPdo()->quote(array_shift($bindings)), $sql);
+		$merged = preg_replace_callback('/\?/', function() use (&$bindings) {
+			return DB::getPdo()->quote(array_shift($bindings));
+		}, $sql);
 		
 		if (strlen($merged) > 120) {
 			$merged = SqlFormatter::format($merged, false);

@@ -88,6 +88,30 @@ class DatabaseCasterTest extends TestCase
 		$this->assertDumpMatchesFormat($expected, $builder);
 	}
 	
+	/** @see https://github.com/glhd/laravel-dumper/issues/6 */
+	public function test_where_between_statement(): void
+	{
+		$builder = User::where('name', 'test')
+			->whereBetween('id', [1, 2]);
+		
+		$expected = <<<EOD
+		Illuminate\Database\Eloquent\Builder {
+		  sql: "select * from "users" where "name" = 'test' and "id" between '1' and '2'"
+		  #connection: Illuminate\Database\SQLiteConnection {
+		    name: "testing"
+		    database: ":memory:"
+		    driver: "sqlite"
+		     …%d
+		  }
+		  #model: Glhd\LaravelDumper\Tests\User { …}
+		  #eagerLoad: []
+		   …%d
+		}
+		EOD;
+		
+		$this->assertDumpMatchesFormat($expected, $builder);
+	}
+	
 	public function test_eloquent_builder(): void
 	{
 		$builder = User::query()
