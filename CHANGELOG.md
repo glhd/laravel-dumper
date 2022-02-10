@@ -5,9 +5,11 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [1.0.1] - 2022-02-10
+
 ### Fixed
 
-- Fixed how bindings are merged into SQL queries when dumping a query builder
+-   Fixed how bindings are merged into SQL queries when dumping a query builder
 
 ## [1.0.0] - 2022-01-24
 
@@ -69,7 +71,9 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 -   `Fixed` for any bug fixes. 
 -   `Security` in case of vulnerabilities.
 
-[Unreleased]: https://github.com/glhd/laravel-dumper/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/glhd/laravel-dumper/compare/1.0.1...HEAD
+
+[1.0.1]: https://github.com/glhd/laravel-dumper/compare/1.0.0...1.0.1
 
 [1.0.0]: https://github.com/glhd/laravel-dumper/compare/0.5.0...1.0.0
 
