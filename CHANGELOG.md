@@ -5,6 +5,10 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed how bindings are merged into SQL queries when dumping a query builder
+
 ## [1.0.0] - 2022-01-24
 
 ## [0.5.0] - 2022-01-23
