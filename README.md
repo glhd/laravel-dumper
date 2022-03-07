@@ -55,8 +55,10 @@ Install as a dev dependency:
 
 ## Usage
 
-Just use `dd()` as you would normally, and enjoy the newly curated output! If, for some reason,
-you really need the full debug output for an object that `laravel-dumper` customizes, you can
+Just use `dd()` as you would normally, and enjoy the newly curated output!
+
+## Original Dump Output
+If, for some reason, you really need the full debug output for an object that `laravel-dumper` customizes, you can
 do a "full" dump with `ddf()` and `dumpf()`.
 
 ## Comparison to Default Output
