@@ -4,6 +4,7 @@ namespace Glhd\LaravelDumper\Casters;
 
 use Closure;
 use Glhd\LaravelDumper\Support\Properties;
+use Illuminate\Contracts\Container\Container;
 use Symfony\Component\VarDumper\Cloner\AbstractCloner;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
@@ -13,16 +14,12 @@ abstract class Caster
 	
 	protected static bool $enabled = true;
 	
-	public static function register($app): void
+	public static function register(Container $app): void
 	{
-		if ($app instanceof Illuminate\Contracts\Foundation\Application || $app instanceof \Laravel\Lumen\Application) {
-			$app->singleton(static::class);
+		$app->singleton(static::class);
 		
-			foreach (static::$targets as $target) {
-				AbstractCloner::$defaultCasters[$target] = self::callback(static::class);
-			}
-		} else {
-			// Maybe do some errorhandling here
+		foreach (static::$targets as $target) {
+			AbstractCloner::$defaultCasters[$target] = self::callback(static::class);
 		}
 	}
 	
