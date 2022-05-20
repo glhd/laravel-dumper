@@ -4,7 +4,7 @@ namespace Glhd\LaravelDumper\Casters;
 
 use Closure;
 use Glhd\LaravelDumper\Support\Properties;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Symfony\Component\VarDumper\Cloner\AbstractCloner;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
@@ -14,7 +14,7 @@ abstract class Caster
 	
 	protected static bool $enabled = true;
 	
-	public static function register(Application $app): void
+	public static function register(Container $app): void
 	{
 		$app->singleton(static::class);
 		
