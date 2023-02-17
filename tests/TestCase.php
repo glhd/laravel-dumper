@@ -50,7 +50,7 @@ abstract class TestCase extends Orchestra
 	
 	protected function getDump($data, $key = null, int $filter = 0): ?string
 	{
-		if (!$this->write_diff_if_configured || '1' !== getenv('WRITE_DIFFS')) {
+		if (! $this->write_diff_if_configured || '1' !== getenv('WRITE_DIFFS')) {
 			return $this->baseGetDump($data, $key, $filter);
 		}
 		

@@ -21,7 +21,7 @@ class DatabaseConnectionCaster extends Caster
 	 */
 	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
 	{
-		if (!is_array($config = $properties->getProtected('config'))) {
+		if (! is_array($config = $properties->getProtected('config'))) {
 			return $properties->all();
 		}
 		

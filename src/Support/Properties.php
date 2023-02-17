@@ -67,7 +67,7 @@ class Properties extends Collection
 			: func_get_args();
 		
 		foreach ($keys as $value) {
-			if (!$this->hasAny($this->addPrefixes($value))) {
+			if (! $this->hasAny($this->addPrefixes($value))) {
 				return false;
 			}
 		}

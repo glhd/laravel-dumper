@@ -5,7 +5,6 @@ namespace Glhd\LaravelDumper\Casters;
 use BadMethodCallException;
 use Closure;
 use Glhd\LaravelDumper\Support\Properties;
-use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\VarDumper\Cloner\AbstractCloner;
 use Symfony\Component\VarDumper\Cloner\Stub;
 

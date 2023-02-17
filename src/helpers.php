@@ -2,7 +2,7 @@
 
 use Glhd\LaravelDumper\Casters\Caster;
 
-if (!function_exists('ddf')) {
+if (! function_exists('ddf')) {
 	function ddf(...$vars)
 	{
 		Caster::disable();
@@ -13,7 +13,7 @@ if (!function_exists('ddf')) {
 	}
 }
 
-if (!function_exists('dumpf')) {
+if (! function_exists('dumpf')) {
 	function dumpf($var, ...$moreVars)
 	{
 		try {

@@ -62,7 +62,7 @@ class ModelCaster extends Caster
 			Key::protected('relations'),
 		];
 		
-		if (!$is_nested) {
+		if (! $is_nested) {
 			$keep = array_merge($keep, [
 				Key::protected('connection'),
 				Key::protected('table'),
