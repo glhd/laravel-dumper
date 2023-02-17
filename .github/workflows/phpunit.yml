@@ -12,6 +12,7 @@ jobs:
 
     strategy:
       matrix:
+        dependency-version: [ stable, lowest ]
         laravel: [ ^8.79, ^9.50.2, 10.* ]
         php: [ 8.0, 8.1, 8.2 ]
         include:
