@@ -5,6 +5,10 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Added
+
+- Added Laravel 10 support
+
 ## [1.0.1] - 2022-02-10
 
 ### Fixed

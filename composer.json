@@ -10,14 +10,15 @@
       "homepage": "http://www.cmorrell.com"
     }
   ],
+  "type": "library",
   "license": "MIT",
   "require": {
-    "illuminate/support": "^8.0|^9.0",
+    "illuminate/support": "^8|^9|^10|11.x-dev|dev-master",
     "ext-json": "*",
     "jdorn/sql-formatter": "^1.2"
   },
   "require-dev": {
-    "orchestra/testbench": "^6.21.1|^7.0",
+    "orchestra/testbench": "^6.24|^7.10|^8|9.x-dev|10.x-dev|dev-master",
     "friendsofphp/php-cs-fixer": "^3.0",
     "mockery/mockery": "^1.3.2",
     "phpunit/phpunit": "^9.5"
