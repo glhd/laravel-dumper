@@ -22,7 +22,7 @@ class CustomCaster extends Caster
 		return $caster;
 	}
 	
-	public static function register(Application $app): void
+	public static function register(Container $app): void
 	{
 		throw new BadMethodCallException('Custom casters must be registered via the LaravelDumper facade.');
 	}
