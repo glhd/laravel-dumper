@@ -5,9 +5,11 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [1.1.0] - 2023-02-17
+
 ### Added
 
-- Added Laravel 10 support
+-   Added Laravel 10 support
 
 ## [1.0.1] - 2022-02-10
 
@@ -75,7 +77,9 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 -   `Fixed` for any bug fixes. 
 -   `Security` in case of vulnerabilities.
 
-[Unreleased]: https://github.com/glhd/laravel-dumper/compare/1.0.1...HEAD
+[Unreleased]: https://github.com/glhd/laravel-dumper/compare/1.1.0...HEAD
+
+[1.1.0]: https://github.com/glhd/laravel-dumper/compare/1.0.1...1.1.0
 
 [1.0.1]: https://github.com/glhd/laravel-dumper/compare/1.0.0...1.0.1
 
