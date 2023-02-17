@@ -10,6 +10,7 @@ return (new PhpCsFixer\Config())
 		'@PSR2' => true,
 		'function_declaration' => [
 			'closure_function_spacing' => 'none',
+			'closure_fn_spacing' => 'none',
 		],
 		'ordered_imports' => [
 			'sort_algorithm' => 'alpha',
@@ -106,6 +107,7 @@ return (new PhpCsFixer\Config())
 		'standardize_not_equals' => true,
 		'ternary_operator_spaces' => true,
 		'whitespace_after_comma_in_array' => true,
+		'not_operator_with_successor_space' => true,
 		'trailing_comma_in_multiline' => true,
 		'trim_array_spaces' => true,
 		'binary_operator_spaces' => true,
