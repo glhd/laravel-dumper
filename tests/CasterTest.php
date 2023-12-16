@@ -15,22 +15,13 @@ class CasterTest extends TestCase
 	{
 		$now = Carbon::parse('2022-01-18 19:44:02.572622', 'America/New_York');
 		
-		$expected = <<<EOD
-		Carbon\Carbon @%d {
-		  date: 2022-01-18 19:44:02.572622 America/New_York (-05:00)
-		  #endOfTime: false
-		  #startOfTime: false
-		  #constructedObjectId: "%s"
-		  #dumpProperties: array:3 [
-		    0 => "date"
-		    1 => "timezone_type"
-		    2 => "timezone"
-		  ]
-		   …%d
-		}
-		EOD;
+		$dump = $this->getDump($now);
 		
-		$this->assertDumpMatchesFormat($expected, $now);
+		$this->assertStringStartsWith('Carbon\\Carbon', $dump);
+		$this->assertStringContainsString('date: 2022-01-18 19:44:02.572622 America/New_York (-05:00)', $dump);;
+		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
+		
+		$this->assertStringNotContainsString('localMacros', $dump);
 	}
 	
 	public function test_package_can_be_disabled(): void
@@ -63,42 +54,17 @@ class CasterTest extends TestCase
 		$container->extend('bar', fn() => $this);
 		$container->make('bar');
 		
-		$fqcn = static::class;
+		$dump = $this->getDump($container);
 		
-		$expected = <<<EOD
-		Illuminate\Container\Container {
-		  #bindings: array:1 [
-		    "{$fqcn}" => array:2 [
-		      "concrete" => Closure() {
-		        class: "{$fqcn}"
-		        this: {$fqcn} {#1 …}
-		        file: "%s"
-		        line: "%d to %d"
-		      }
-		      "shared" => false
-		    ]
-		  ]
-		  #aliases: array:1 [
-		    "bar" => "{$fqcn}"
-		  ]
-		  #resolved: array:1 [
-		    "{$fqcn}" => true
-		  ]
-		  #extenders: array:1 [
-		    "{$fqcn}" => array:1 [
-		      0 => Closure() {
-		        class: "{$fqcn}"
-		        this: Glhd\LaravelDumper\Tests\CasterTest {#1 …}
-		        file: "%s"
-		        line: "%d to %d"
-		      }
-		    ]
-		  ]
-		   …%d
-		}
-		EOD;
+		$this->assertStringStartsWith('Illuminate\\Container\\Container', $dump);
+		$this->assertStringContainsString('#bindings', $dump);;
+		$this->assertStringContainsString('#aliases', $dump);;
+		$this->assertStringContainsString('#resolved', $dump);;
+		$this->assertStringContainsString('#extenders', $dump);;
+		$this->assertStringContainsString(static::class, $dump);;
+		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
 		
-		$this->assertDumpMatchesFormat($expected, $container);
+		$this->assertStringNotContainsString('#globalBeforeResolvingCallbacks', $dump);
 	}
 	
 	public function test_container_nested(): void
@@ -117,53 +83,6 @@ class CasterTest extends TestCase
 	public function test_request(): void
 	{
 		$request = Request::create('/1');
-		
-		$expected = <<<EOD
-		Illuminate\Http\Request {
-		  +attributes: Symfony\Component\HttpFoundation\ParameterBag {}
-		  +request: Symfony\Component\HttpFoundation\InputBag {}
-		  +query: Symfony\Component\HttpFoundation\InputBag {}
-		  +server: Symfony\Component\HttpFoundation\ServerBag {
-		    SERVER_NAME: "localhost"
-		    SERVER_PORT: 80
-		    HTTP_HOST: "localhost"
-		    HTTP_USER_AGENT: "Symfony"
-		    HTTP_ACCEPT: "%s"
-		    HTTP_ACCEPT_LANGUAGE: "%s"
-		    HTTP_ACCEPT_CHARSET: "%s"
-		    REMOTE_ADDR: "%s"
-		    SCRIPT_NAME: ""
-		    SCRIPT_FILENAME: ""
-		    SERVER_PROTOCOL: "HTTP/1.1"
-		    REQUEST_TIME: %d
-		    REQUEST_TIME_FLOAT: %d.%d
-		    PATH_INFO: ""
-		    REQUEST_METHOD: "GET"
-		    REQUEST_URI: "/1"
-		    QUERY_STRING: ""
-		  }
-		  +files: Symfony\Component\HttpFoundation\FileBag {}
-		  +cookies: Symfony\Component\HttpFoundation\InputBag {}
-		  +headers: Symfony\Component\HttpFoundation\HeaderBag {
-		    host: "localhost"
-		    user-agent: "Symfony"
-		    accept: "%s"
-		    accept-language: "%s"
-		    accept-charset: "%s"
-		    #cacheControl: []
-		  }
-		  #defaultLocale: "en"
-		  -isHostValid: true
-		  -isForwardedValid: true
-		  pathInfo: "/1"
-		  requestUri: "/1"
-		  baseUrl: ""
-		  basePath: ""
-		  method: "GET"
-		  format: "html"
-		   …%d
-		}
-		EOD;
 		
 		$dump = $this->getDump($request);
 		

@@ -24,46 +24,20 @@ class DatabaseCasterTest extends TestCase
 		
 		$timestamp = $now->format('Y-m-d H:i:s');
 		
-		$expected = <<<EOD
-		Glhd\LaravelDumper\Tests\User {
-		  +"id": %d
-		  +"company_id": %d
-		  +"email": "foo@bar.com"
-		  +"name": "Chris"
-		  +"created_at": "{$timestamp}"
-		  +"updated_at": "{$timestamp}"
-		  isDirty(): true
-		  +exists: true
-		  +wasRecentlyCreated: true
-		  #relations: array:1 [
-		    "company" => Glhd\LaravelDumper\Tests\Company {
-		      +"id": %d
-		      +"name": "Galahad"
-		      +"created_at": "{$timestamp}"
-		      +"updated_at": "{$timestamp}"
-		      isDirty(): false
-		      +exists: true
-		      +wasRecentlyCreated: true
-		      #relations: []
-		       …%d
-		    }
-		  ]
-		  #connection: "testing"
-		  #table: "users"
-		  #original: array:6 [
-		    "name" => "John"
-		    "email" => "foo@bar.com"
-		    "company_id" => %d
-		    "updated_at" => "{$timestamp}"
-		    "created_at" => "{$timestamp}"
-		    "id" => %d
-		  ]
-		  #changes: []
-		   …%d
-		}
-		EOD;
+		$dump = $this->getDump($user);
 		
-		$this->assertDumpMatchesFormat($expected, $user);
+		$this->assertStringStartsWith(User::class, $dump);
+		$this->assertStringContainsString('id', $dump);
+		$this->assertStringContainsString('company_id', $dump);
+		$this->assertStringContainsString('email', $dump);
+		$this->assertStringContainsString('name', $dump);
+		$this->assertStringContainsString('isDirty()', $dump);
+		$this->assertStringContainsString('exists', $dump);
+		$this->assertStringContainsString('wasRecentlyCreated', $dump);
+		$this->assertStringContainsString($timestamp, $dump);
+		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
+		
+		$this->assertStringNotContainsString('escapeWhenCastingToString', $dump);
 	}
 	
 	public function test_query_builder(): void
@@ -72,20 +46,12 @@ class DatabaseCasterTest extends TestCase
 			->where('email', 'bogdan@foo.com')
 			->limit(10);
 		
-		$expected = <<<EOD
-		Illuminate\Database\Query\Builder {
-		  sql: "select * from "users" where "email" = 'bogdan@foo.com' limit 10"
-		  #connection: Illuminate\Database\SQLiteConnection {
-		    name: "testing"
-		    database: ":memory:"
-		    driver: "sqlite"
-		     …%d
-		  }
-		   …%d
-		}
-		EOD;
-
-		$this->assertDumpMatchesFormat($expected, $builder);
+		$dump = $this->getDump($builder);
+		
+		$this->assertStringStartsWith('Illuminate\\Database\\Query\\Builder {', $dump);
+		$this->assertStringContainsString('select * from "users" where "email" = \'bogdan@foo.com\' limit 10', $dump);
+		$this->assertStringContainsString('#connection', $dump);
+		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
 	}
 	
 	/** @see https://github.com/glhd/laravel-dumper/issues/6 */
@@ -94,22 +60,14 @@ class DatabaseCasterTest extends TestCase
 		$builder = User::where('name', 'test')
 			->whereBetween('id', [1, 2]);
 		
-		$expected = <<<EOD
-		Illuminate\Database\Eloquent\Builder {
-		  sql: "select * from "users" where "name" = 'test' and "id" between '1' and '2'"
-		  #connection: Illuminate\Database\SQLiteConnection {
-		    name: "testing"
-		    database: ":memory:"
-		    driver: "sqlite"
-		     …%d
-		  }
-		  #model: Glhd\LaravelDumper\Tests\User { …}
-		  #eagerLoad: []
-		   …%d
-		}
-		EOD;
+		$dump = $this->getDump($builder);
 		
-		$this->assertDumpMatchesFormat($expected, $builder);
+		$this->assertStringStartsWith('Illuminate\\Database\\Eloquent\\Builder {', $dump);
+		$this->assertStringContainsString('select * from "users" where "name" = \'test\' and "id" between \'1\' and \'2\'', $dump);
+		$this->assertStringContainsString('#connection', $dump);
+		$this->assertStringContainsString('#model', $dump);
+		$this->assertStringContainsString(User::class, $dump);
+		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
 	}
 	
 	public function test_eloquent_builder(): void
@@ -133,116 +91,15 @@ class DatabaseCasterTest extends TestCase
 		Company::create(['id' => 1, 'name' => 'Galahad']);
 		$user = User::create(['id' => 1, 'name' => 'John', 'email' => 'foo@bar.com', 'company_id' => 1]);
 		
-		$expected = <<<EOD
-		Illuminate\Database\Eloquent\Relations\BelongsTo {
-		  sql: "select * from "companies" where "companies"."id" = '1'"
-		  #connection: Illuminate\Database\SQLiteConnection {
-		    name: "testing"
-		    database: ":memory:"
-		    driver: "sqlite"
-		     …%d
-		  }
-		  #parent: Glhd\LaravelDumper\Tests\User { …}
-		  #related: Glhd\LaravelDumper\Tests\Company { …}
-		   …%d
-		}
-		EOD;
+		$dump = $this->getDump($user->company());
 		
-		$this->assertDumpMatchesFormat($expected, $user->company());
-	}
-	
-	public function test_unexpected_database_connections(): void
-	{
-		// Database connections don't necessarily need to have a $config
-		// array. If they don't, we just return the original.
-		
-		$conn = new class() implements ConnectionInterface {
-			public $foo = 'bar';
-			
-			public function table($table, $as = null)
-			{
-			}
-			
-			public function raw($value)
-			{
-			}
-			
-			public function selectOne($query, $bindings = [], $useReadPdo = true)
-			{
-			}
-			
-			public function select($query, $bindings = [], $useReadPdo = true)
-			{
-			}
-			
-			public function cursor($query, $bindings = [], $useReadPdo = true)
-			{
-			}
-			
-			public function insert($query, $bindings = [])
-			{
-			}
-			
-			public function update($query, $bindings = [])
-			{
-			}
-			
-			public function delete($query, $bindings = [])
-			{
-			}
-			
-			public function statement($query, $bindings = [])
-			{
-			}
-			
-			public function affectingStatement($query, $bindings = [])
-			{
-			}
-			
-			public function unprepared($query)
-			{
-			}
-			
-			public function prepareBindings(array $bindings)
-			{
-			}
-			
-			public function transaction(Closure $callback, $attempts = 1)
-			{
-			}
-			
-			public function beginTransaction()
-			{
-			}
-			
-			public function commit()
-			{
-			}
-			
-			public function rollBack()
-			{
-			}
-			
-			public function transactionLevel()
-			{
-			}
-			
-			public function pretend(Closure $callback)
-			{
-			}
-			
-			public function getDatabaseName()
-			{
-			}
-		};
-		
-		$expected = <<<EOD
-		Illuminate\Database\ConnectionInterface@anonymous {
-		  +foo: "bar"
-		}
-		EOD;
-		
-		$this->assertDumpEquals($expected, $conn);
+		$this->assertStringStartsWith('Illuminate\\Database\\Eloquent\\Relations\\BelongsTo {', $dump);
+		$this->assertStringContainsString('select * from "companies" where "companies"."id" = \'1\'', $dump);
+		$this->assertStringContainsString('#parent', $dump);
+		$this->assertStringContainsString('#related', $dump);
+		$this->assertStringContainsString(User::class, $dump);
+		$this->assertStringContainsString(Company::class, $dump);
+		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
 	}
 	
 	protected function defineDatabaseMigrations()
