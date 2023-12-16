@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use SqlFormatter;
 use Symfony\Component\VarDumper\Cloner\Stub;
+use Throwable;
 
 class BuilderCaster extends Caster
 {
@@ -31,7 +32,7 @@ class BuilderCaster extends Caster
 	{
 		$result = new Properties();
 		
-		$result->putVirtual('sql', $this->formatSql($target->toSql(), $target->getBindings()));
+		$result->putVirtual('sql', $this->formatSql($target));
 		$result->putProtected('connection', $target->getConnection());
 		
 		if ($target instanceof EloquentBuilder) {
@@ -49,9 +50,18 @@ class BuilderCaster extends Caster
 		return $result->all();
 	}
 	
-	protected function formatSql($sql, $bindings): string
+	protected function formatSql($target): string
 	{
-		$bindings = Arr::flatten($bindings);
+		try {
+			if (method_exists($target, 'toRawSql')) {
+				return $target->toRawSql();
+			}
+		} catch (Throwable $e) {
+			// Just fall back on naive formatter below
+		}
+		
+		$sql = $target->toSql();
+		$bindings = Arr::flatten($target->getBindings());
 		$merged = preg_replace_callback('/\?/', function() use (&$bindings) {
 			return DB::getPdo()->quote(array_shift($bindings));
 		}, $sql);
