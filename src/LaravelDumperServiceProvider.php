@@ -6,18 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class LaravelDumperServiceProvider extends ServiceProvider
 {
-	protected array $casters = [
-		Casters\ContainerCaster::class,
-		Casters\ModelCaster::class,
-		Casters\BuilderCaster::class,
-		Casters\DatabaseConnectionCaster::class,
-		Casters\CarbonCaster::class,
-		Casters\RequestCaster::class,
-		Casters\ParameterBagCaster::class,
-		Casters\HeaderBagCaster::class,
-		Casters\ResponseCaster::class,
-	];
-	
 	public function register()
 	{
 		$this->mergeConfigFrom($this->packageConfigFile(), 'laravel-dumper');
@@ -45,8 +33,7 @@ class LaravelDumperServiceProvider extends ServiceProvider
 	
 	protected function registerCasters(): void
 	{
-		$casters = array_merge($this->casters, config('laravel-dumper.casters', []));
-		
+		$casters = require __DIR__.'/Casters/manifest.php';
 		foreach ($casters as $caster) {
 			$caster::register($this->app);
 		}

@@ -68,45 +68,5 @@ in the [diffs directory of this repository](./diffs/).
 
 ## Custom Casters
 
-If there are objects in your project that you would like to customize the `dd()` behavior
-for, you can register custom casters using the `CustomCaster` class:
-
-```php
-use Glhd\LaravelDumper\Casters\CustomCaster;
-
-CustomCaster::for(User::class)
-    ->only(['attributes', 'exists', 'wasRecentlyCreated']) // Props to keep (or use `except` to exclude)
-    ->virtual('admin', fn(User $user) => $user->isAdmin()) // Add virtual props
-    ->filter() // Filter out empty/null props (accepts callback)
-    ->reorder(['attributes', 'admin', '*']); // Adjust the order of props
-```
-
-The `reorder` method accepts an array of patterns. For example, the default `Model` caster
-uses the following ordering rules:
-
-```php
-$order = [
-  'id',
-  '*_id',
-  '*',
-  '*_at',
-  'created_at',
-  'updated_at',
-  'deleted_at',
-];
-```
-
-This ensures that `id` is always first, followed by all foreign keys, followed by all
-other attributes, and then finally followed by timestamp attributes (with `deleted_at` last). 
-By applying bespoke ordering rules, you can make sure that the properties you usually
-need to debug are at the top of the `dd()` output.
-
-### Advanced Custom Casters
-
-It's also possible to register your own casters for any class by publishing the `laravel-dumper`
-config file and registering your custom classes in the `'casters'` section of the config.
-This gives you the same level of control over the `dd()` output as the core Symfony
-VarDumper package, but is more complex to implement.
-
-Your custom casters should extend `Glhd\LaravelDumper\Casters\Caster` and implement the
-`cast` method. See any of our [built-in casters](./src/Casters/) for more details.
+Due to [changes in how Laravel registers the var dumper](https://github.com/laravel/framework/pull/44211) it
+is no longer possible to register custom casters.

@@ -14,13 +14,16 @@ abstract class Caster
 	
 	protected static bool $enabled = true;
 	
-	public static function register(Container $app): void
+	public static function autoload(): void
 	{
-		$app->singleton(static::class);
-		
 		foreach (static::$targets as $target) {
 			AbstractCloner::$defaultCasters[$target] = self::callback(static::class);
 		}
+	}
+	
+	public static function register(Container $app): void
+	{
+		$app->singleton(static::class);
 	}
 	
 	public static function callback($caster): Closure

@@ -13,17 +13,4 @@ return [
 	*/
 	
 	'environments' => ['local', 'testing'],
-	
-	/*
-	|--------------------------------------------------------------------------
-	| Custom Casters
-	|--------------------------------------------------------------------------
-	|
-	| If you would like to register any custom casters, you can do so here.
-	|
-	*/
-	
-	'casters' => [
-		// App\VarDumper\Casters\MyCustomCaster::class,
-	],
 ];

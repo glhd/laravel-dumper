@@ -1,53 +1,56 @@
 {
-  "name": "glhd/laravel-dumper",
-  "description": "",
-  "keywords": [
-    "laravel"
-  ],
-  "authors": [
-    {
-      "name": "Chris Morrell",
-      "homepage": "http://www.cmorrell.com"
-    }
-  ],
-  "type": "library",
-  "license": "MIT",
-  "require": {
-    "illuminate/support": "^8|^9|^10|11.x-dev|dev-master",
-    "ext-json": "*",
-    "jdorn/sql-formatter": "^1.2"
-  },
-  "require-dev": {
-    "orchestra/testbench": "^6.24|^7.10|^8|9.x-dev|10.x-dev|dev-master",
-    "friendsofphp/php-cs-fixer": "^3.0",
-    "mockery/mockery": "^1.3.2",
-    "phpunit/phpunit": "^9.5"
-  },
-  "autoload": {
-    "psr-4": {
-      "Glhd\\LaravelDumper\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "classmap": [
-      "tests/TestCase.php"
+    "name": "glhd/laravel-dumper",
+    "description": "",
+    "keywords": [
+        "laravel"
     ],
-    "psr-4": {
-      "Glhd\\LaravelDumper\\Tests\\": "tests/"
-    }
-  },
-  "scripts": {
-    "write-diffs": "WRITE_DIFFS=1 vendor/bin/phpunit",
-    "fix-style": "vendor/bin/php-cs-fixer fix",
-    "check-style": "vendor/bin/php-cs-fixer fix --diff --dry-run"
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Glhd\\LaravelDumper\\LaravelDumperServiceProvider"
-      ]
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "authors": [
+        {
+            "name": "Chris Morrell",
+            "homepage": "http://www.cmorrell.com"
+        }
+    ],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "illuminate/support": "^8|^9|^10|11.x-dev|dev-master",
+        "ext-json": "*",
+        "jdorn/sql-formatter": "^1.2"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.24|^7.10|^8|9.x-dev|10.x-dev|dev-master",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "mockery/mockery": "^1.3.2",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Glhd\\LaravelDumper\\": "src/"
+        },
+        "files": [
+            "src/autoload.php"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ],
+        "psr-4": {
+            "Glhd\\LaravelDumper\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "write-diffs": "WRITE_DIFFS=1 vendor/bin/phpunit",
+        "fix-style": "vendor/bin/php-cs-fixer fix",
+        "check-style": "vendor/bin/php-cs-fixer fix --diff --dry-run"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Glhd\\LaravelDumper\\LaravelDumperServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
