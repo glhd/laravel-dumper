@@ -165,29 +165,26 @@ class CasterTest extends TestCase
 		}
 		EOD;
 		
-		$this->assertDumpMatchesFormat($expected, $request);
+		$dump = $this->getDump($request);
+		
+		$this->assertStringStartsWith('Illuminate\\Http\\Request {', $dump);
+		$this->assertStringContainsString('+attributes', $dump);
+		$this->assertStringContainsString('+request', $dump);
+		$this->assertStringContainsString('+query', $dump);
+		$this->assertStringContainsString('+server', $dump);
+		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
 	}
 	
 	public function test_response(): void
 	{
 		$response = new Response('Hello world.');
 		
-		$expected = <<<EOD
-		Illuminate\Http\Response {
-		  +headers: Symfony\Component\HttpFoundation\ResponseHeaderBag {
-		    cache-control: "%s"
-		    date: "%s"
-		    #cacheControl: []
-		  }
-		  #content: "Hello world."
-		  #version: "%d.%d"
-		  #statusCode: 200
-		  #statusText: "OK"
-		  +original: "Hello world."
-		   …%d
-		}
-		EOD;
+		$dump = $this->getDump($response);
 		
-		$this->assertDumpMatchesFormat($expected, $response);
+		$this->assertStringStartsWith('Illuminate\\Http\\Response {', $dump);
+		$this->assertStringContainsString('+headers', $dump);
+		$this->assertStringContainsString('#content: "Hello world."', $dump);
+		$this->assertStringContainsString('#statusCode: 200', $dump);
+		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
 	}
 }

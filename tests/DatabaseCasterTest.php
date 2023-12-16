@@ -114,35 +114,18 @@ class DatabaseCasterTest extends TestCase
 	
 	public function test_eloquent_builder(): void
 	{
-		$this->markTestSkipped('The output format differs too greatly across Laravel versions. This test needs to split by version.');
-		
 		$builder = User::query()
 			->with('company')
 			->where('email', 'bogdan@foo.com')
 			->limit(10);
 		
-		$expected = <<<EOD
-		Illuminate\Database\Eloquent\Builder {
-		  sql: "select * from "users" where "email" = 'bogdan@foo.com' limit 10"
-		  #connection: Illuminate\Database\SQLiteConnection {
-		    name: "testing"
-		    database: ":memory:"
-		    driver: "sqlite"
-		     …%d
-		  }
-		  #model: Glhd\LaravelDumper\Tests\User { …}
-		  #eagerLoad: array:1 [
-		    "company" => Closure() {
-		      class: "Illuminate\Database\Eloquent\Builder"
-		      file: "%s"
-		      line: "%d to %d"
-		    }
-		  ]
-		   …%d
-		}
-		EOD;
+		$dump = $this->getDump($builder);
 		
-		$this->assertDumpMatchesFormat($expected, $builder);
+		$this->assertStringStartsWith('Illuminate\\Database\\Eloquent\\Builder {', $dump);
+		$this->assertStringContainsString('select * from "users" where "email" = \'bogdan@foo.com\' limit 10', $dump);
+		$this->assertStringContainsString('#model', $dump);
+		$this->assertStringContainsString('#eagerLoad', $dump);
+		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
 	}
 	
 	public function test_eloquent_relation(): void
