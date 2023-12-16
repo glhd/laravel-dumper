@@ -18,7 +18,7 @@ class CasterTest extends TestCase
 		$dump = $this->getDump($now);
 		
 		$this->assertStringStartsWith('Carbon\\Carbon', $dump);
-		$this->assertStringContainsString('date: 2022-01-18 19:44:02.572622 America/New_York (-05:00)', $dump);;
+		$this->assertStringContainsString('date: 2022-01-18 19:44:02.572622 America/New_York (-05:00)', $dump);
 		$this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);
 		
 		$this->assertStringNotContainsString('localMacros', $dump);
@@ -57,11 +57,11 @@ class CasterTest extends TestCase
 		$dump = $this->getDump($container);
 		
 		$this->assertStringStartsWith('Illuminate\\Container\\Container', $dump);
-		$this->assertStringContainsString('#bindings', $dump);;
-		$this->assertStringContainsString('#aliases', $dump);;
-		$this->assertStringContainsString('#resolved', $dump);;
-		$this->assertStringContainsString('#extenders', $dump);;
-		$this->assertStringContainsString(static::class, $dump);;
+		$this->assertStringContainsString('#bindings', $dump);
+		$this->assertStringContainsString('#aliases', $dump);
+		$this->assertStringContainsString('#resolved', $dump);
+		$this->assertStringContainsString('#extenders', $dump);
+		$this->assertStringContainsString(static::class, $dump);
 		
 		// These won't be true until I get a PR to Laravel
 		// $this->assertMatchesRegularExpression('/\s*…\d+\n}$/', $dump);

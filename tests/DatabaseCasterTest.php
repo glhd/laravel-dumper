@@ -2,8 +2,6 @@
 
 namespace Glhd\LaravelDumper\Tests;
 
-use Closure;
-use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Date;
