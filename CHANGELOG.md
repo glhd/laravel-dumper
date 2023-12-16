@@ -5,6 +5,8 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [2.0.0] - 2023-12-16
+
 ## [1.1.0] - 2023-02-17
 
 ### Added
@@ -77,7 +79,9 @@ format. This project adheres to [Semantic Versioning](https://semver.org/spec/v2
 -   `Fixed` for any bug fixes. 
 -   `Security` in case of vulnerabilities.
 
-[Unreleased]: https://github.com/glhd/laravel-dumper/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/glhd/laravel-dumper/compare/2.0.0...HEAD
+
+[2.0.0]: https://github.com/glhd/laravel-dumper/compare/1.1.0...2.0.0
 
 [1.1.0]: https://github.com/glhd/laravel-dumper/compare/1.0.1...1.1.0
 
