@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: '0 14 * * 3' # Run Wednesdays at 2pm EST
+    - cron: '0 14 * * 3'
 
 jobs:
   php-tests:
@@ -12,17 +12,23 @@ jobs:
 
     strategy:
       matrix:
-        dependency-version: [ stable, lowest ]
-        laravel: [ ^9.50.2, 10.* ]
-        php: [ 8.1, 8.2 ]
+        dependency-version: [stable, lowest]
+        laravel: ['10.*', '11.0', ^9.50.2]
+        php: [8.1, 8.2]
         include:
           - laravel: ^9.50.2
             testbench: ^7.22
           - laravel: 10.*
             testbench: 8.*
-    
+          - laravel: '11.0'
+            testbench: ^9.0
+        exclude:
+          - laravel: 11.*
+            php: 8.1
+
     timeout-minutes: 10
-    name: "${{ matrix.php }} / ${{ matrix.laravel }} (${{ matrix.dependency-version }})"
+
+    name: ${{ matrix.php }} / ${{ matrix.laravel }} (${{ matrix.dependency-version }})
 
     steps:
       - name: Checkout code
@@ -52,7 +58,7 @@ jobs:
 
       - name: Install dependencies
         run: composer require --no-interaction --prefer-dist --no-update "illuminate/support:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}"
-      
+
       - name: Set dependency version
         run: composer update --no-interaction --prefer-dist --with-all-dependencies --prefer-${{ matrix.dependency-version }}
 
