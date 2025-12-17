@@ -3,6 +3,7 @@ composer.phar
 composer.lock
 .phpunit.result.cache
 .php-cs-fixer.cache
+.phpunit.cache
 
 .DS_Store
 .phpstorm.meta.php

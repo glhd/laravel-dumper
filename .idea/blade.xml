@@ -98,7 +98,7 @@
       <data directive="@unless" injection="true" prefix="&lt;?php if (! (" suffix=")): ?&gt;" />
       <data directive="@unset" injection="true" prefix="&lt;?php unset(" suffix="); ?&gt;" />
       <data directive="@verbatim" />
-      <data directive="@vite" injection="true" prefix="&lt;?php echo app('\\Illuminate\\Foundation\\Vite')(" suffix="); ?&gt;" />
+      <data directive="@vite" injection="true" prefix="&lt;?php echo vite_func(" suffix="); ?&gt;" />
       <data directive="@viteReactRefresh" />
       <data directive="@while" injection="true" prefix="&lt;?php while(" suffix="): ?&gt;" />
       <data directive="@yield" injection="true" prefix="&lt;?php echo $__env-&gt;yieldContent(" suffix="); ?&gt;" />

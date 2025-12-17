@@ -7,6 +7,7 @@
           <versions>
             <info id="Local" version="9.5.11" />
             <info id="Local/Users/inxilpro/Development/open-source/laravel-dumper/vendor/autoload.php" version="9.6.15" />
+            <info id="Local/vendor/autoload.php" version="11.5.46" />
           </versions>
         </cache>
       </tool>
