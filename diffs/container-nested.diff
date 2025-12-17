@@ -1,6 +1,6 @@
---- Before	2022-01-24 09:44:04.000000000 -0500
-+++ After	2022-01-24 09:44:04.000000000 -0500
-@@ -1,23 +1,3 @@
+--- Before	2025-12-17 16:35:07
++++ After	2025-12-17 16:35:07
+@@ -1,28 +1,3 @@
  array:1 [
 -  0 => Illuminate\Container\Container {
 -    #resolved: []
@@ -15,6 +15,9 @@
 -    #buildStack: []
 -    #with: []
 -    +contextual: []
+-    +contextualAttributes: []
+-    #checkedForAttributeBindings: []
+-    #checkedForSingletonOrScopedAttributes: []
 -    #reboundCallbacks: []
 -    #globalBeforeResolvingCallbacks: []
 -    #globalResolvingCallbacks: []
@@ -22,6 +25,8 @@
 -    #beforeResolvingCallbacks: []
 -    #resolvingCallbacks: []
 -    #afterResolvingCallbacks: []
+-    #afterResolvingAttributeCallbacks: []
+-    #environmentResolver: null
 -  }
-+  0 => Illuminate\Container\Container { …19}
++  0 => Illuminate\Container\Container { …24}
  ]
