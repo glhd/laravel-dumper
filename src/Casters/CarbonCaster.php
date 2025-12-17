@@ -4,6 +4,7 @@ namespace Glhd\LaravelDumper\Casters;
 
 use Carbon\CarbonInterface;
 use Glhd\LaravelDumper\Support\Properties;
+use Herd\Symfony\Component\VarDumper\Cloner\Stub as HerdStub;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
 class CarbonCaster extends Caster
@@ -18,7 +19,7 @@ class CarbonCaster extends Caster
 	 * @param int $filter
 	 * @return array
 	 */
-	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub|HerdStub $stub, bool $is_nested, int $filter = 0): array
 	{
 		return $properties
 			->putVirtual('date', $target->format($this->getFormat($target)))

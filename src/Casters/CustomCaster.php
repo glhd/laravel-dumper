@@ -5,6 +5,7 @@ namespace Glhd\LaravelDumper\Casters;
 use BadMethodCallException;
 use Closure;
 use Glhd\LaravelDumper\Support\Properties;
+use Herd\Symfony\Component\VarDumper\Cloner\Stub as HerdStub;
 use Illuminate\Contracts\Container\Container;
 use Symfony\Component\VarDumper\Cloner\AbstractCloner;
 use Symfony\Component\VarDumper\Cloner\Stub;
@@ -27,7 +28,7 @@ class CustomCaster extends Caster
 		throw new BadMethodCallException('Custom casters must be registered via the LaravelDumper facade.');
 	}
 	
-	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub|HerdStub $stub, bool $is_nested, int $filter = 0): array
 	{
 		return collect($this->operations)
 			->reduce(fn(Properties $properties, Closure $operation) => $operation($properties, $target), $properties)

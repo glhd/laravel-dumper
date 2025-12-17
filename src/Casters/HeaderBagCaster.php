@@ -4,6 +4,7 @@ namespace Glhd\LaravelDumper\Casters;
 
 use Glhd\LaravelDumper\Support\Key;
 use Glhd\LaravelDumper\Support\Properties;
+use Herd\Symfony\Component\VarDumper\Cloner\Stub as HerdStub;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
@@ -19,7 +20,7 @@ class HeaderBagCaster extends Caster
 	 * @param int $filter
 	 * @return array
 	 */
-	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub|HerdStub $stub, bool $is_nested, int $filter = 0): array
 	{
 		$result = collect($target->all())
 			->map(function(array $headers) {

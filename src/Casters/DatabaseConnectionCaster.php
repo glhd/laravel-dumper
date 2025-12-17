@@ -4,6 +4,7 @@ namespace Glhd\LaravelDumper\Casters;
 
 use Glhd\LaravelDumper\Support\Key;
 use Glhd\LaravelDumper\Support\Properties;
+use Herd\Symfony\Component\VarDumper\Cloner\Stub as HerdStub;
 use Illuminate\Database\ConnectionInterface;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
@@ -19,7 +20,7 @@ class DatabaseConnectionCaster extends Caster
 	 * @param int $filter
 	 * @return array
 	 */
-	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub|HerdStub $stub, bool $is_nested, int $filter = 0): array
 	{
 		if (! is_array($config = $properties->getProtected('config'))) {
 			return $properties->all();

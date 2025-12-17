@@ -3,6 +3,7 @@
 namespace Glhd\LaravelDumper\Casters;
 
 use Glhd\LaravelDumper\Support\Properties;
+use Herd\Symfony\Component\VarDumper\Cloner\Stub as HerdStub;
 use Illuminate\Contracts\Container\Container;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
@@ -17,7 +18,7 @@ class ContainerCaster extends Caster
 		'extenders',
 	];
 	
-	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub|HerdStub $stub, bool $is_nested, int $filter = 0): array
 	{
 		if ($is_nested) {
 			$stub->cut += $properties->count();

@@ -4,6 +4,7 @@ namespace Glhd\LaravelDumper\Casters;
 
 use Glhd\LaravelDumper\Support\Key;
 use Glhd\LaravelDumper\Support\Properties;
+use Herd\Symfony\Component\VarDumper\Cloner\Stub as HerdStub;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
@@ -29,7 +30,7 @@ class ModelCaster extends Caster
 	 * @param int $filter
 	 * @return array
 	 */
-	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub|HerdStub $stub, bool $is_nested, int $filter = 0): array
 	{
 		return array_merge(
 			$this->attributesToDynamicProperties($target),
@@ -54,7 +55,7 @@ class ModelCaster extends Caster
 		];
 	}
 	
-	protected function cutProperties(Properties $properties, Stub $stub, bool $is_nested): array
+	protected function cutProperties(Properties $properties, Stub|HerdStub $stub, bool $is_nested): array
 	{
 		$keep = [
 			'exists',

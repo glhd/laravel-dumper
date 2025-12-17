@@ -3,6 +3,7 @@
 namespace Glhd\LaravelDumper\Support;
 
 use Closure;
+use Herd\Symfony\Component\VarDumper\Cloner\Stub as HerdStub;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Enumerable;
@@ -20,7 +21,7 @@ class Properties extends Collection
 		Caster::PREFIX_DYNAMIC,
 	];
 	
-	public function applyCutsToStub(Stub $stub, Properties $original): Properties
+	public function applyCutsToStub(Stub|HerdStub $stub, Properties $original): Properties
 	{
 		$stub->cut += ($original->count() - $this->count());
 		

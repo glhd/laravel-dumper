@@ -3,6 +3,7 @@
 namespace Glhd\LaravelDumper\Casters;
 
 use Glhd\LaravelDumper\Support\Properties;
+use Herd\Symfony\Component\VarDumper\Cloner\Stub as HerdStub;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\VarDumper\Cloner\Stub;
@@ -19,7 +20,7 @@ class ResponseCaster extends Caster
 	 * @param int $filter
 	 * @return array
 	 */
-	public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array
+	public function cast($target, Properties $properties, Stub|HerdStub $stub, bool $is_nested, int $filter = 0): array
 	{
 		return $properties
 			->filter()

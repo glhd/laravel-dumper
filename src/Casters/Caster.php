@@ -4,6 +4,8 @@ namespace Glhd\LaravelDumper\Casters;
 
 use Closure;
 use Glhd\LaravelDumper\Support\Properties;
+use Herd\Symfony\Component\VarDumper\Cloner\AbstractCloner as HerdCloner;
+use Herd\Symfony\Component\VarDumper\Cloner\Stub as HerdStub;
 use Illuminate\Contracts\Container\Container;
 use Symfony\Component\VarDumper\Cloner\AbstractCloner;
 use Symfony\Component\VarDumper\Cloner\Stub;
@@ -18,6 +20,10 @@ abstract class Caster
 	{
 		foreach (static::$targets as $target) {
 			AbstractCloner::$defaultCasters[$target] = self::callback(static::class);
+			
+			if (class_exists(HerdCloner::class)) {
+				HerdCloner::$defaultCasters[$target] = self::callback(static::class);
+			}
 		}
 	}
 	
@@ -28,7 +34,7 @@ abstract class Caster
 	
 	public static function callback($caster): Closure
 	{
-		return static function($target, array $properties, Stub $stub, bool $is_nested, int $filter = 0) use ($caster) {
+		return static function($target, array $properties, Stub|HerdStub $stub, bool $is_nested, int $filter = 0) use ($caster) {
 			$instance = $caster instanceof Caster
 				? $caster
 				: app($caster);
@@ -49,5 +55,5 @@ abstract class Caster
 		self::$enabled = true;
 	}
 	
-	abstract public function cast($target, Properties $properties, Stub $stub, bool $is_nested, int $filter = 0): array;
+	abstract public function cast($target, Properties $properties, Stub|HerdStub $stub, bool $is_nested, int $filter = 0): array;
 }
