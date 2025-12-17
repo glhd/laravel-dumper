@@ -19,7 +19,7 @@
         "jdorn/sql-formatter": "^1.2"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.24|^7.10|^8|^9|^10|11.x-dev|dev-master|dev-main",
+        "orchestra/testbench": "^6.47|^7.55|^8.36|^9.15|^10.8|11.x-dev|dev-master|dev-main",
         "friendsofphp/php-cs-fixer": "^3.9",
         "mockery/mockery": "^1.4",
         "phpunit/phpunit": "^9|^10.5|^11.5"
