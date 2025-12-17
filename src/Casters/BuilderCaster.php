@@ -53,24 +53,28 @@ class BuilderCaster extends Caster
 	
 	protected function formatSql($target): string
 	{
+		$formatted = null;
+		
 		try {
 			if (method_exists($target, 'toRawSql')) {
-				return $target->toRawSql();
+				$formatted = $target->toRawSql();
 			}
-		} catch (Throwable $e) {
+		} catch (Throwable) {
 			// Just fall back on naive formatter below
 		}
 		
-		$sql = $target->toSql();
-		$bindings = Arr::flatten($target->getBindings());
-		$merged = preg_replace_callback('/\?/', function() use (&$bindings) {
-			return DB::getPdo()->quote(array_shift($bindings));
-		}, $sql);
-		
-		if (strlen($merged) > 120) {
-			$merged = SqlFormatter::format($merged, false);
+		if (null === $formatted) {
+			$sql = $target->toSql();
+			$bindings = Arr::flatten($target->getBindings());
+			$formatted = preg_replace_callback('/\?/', function() use (&$bindings) {
+				return DB::getPdo()->quote(array_shift($bindings));
+			}, $sql);
 		}
 		
-		return $merged;
+		if (strlen($formatted) > 120 && class_exists(SqlFormatter::class)) {
+			$formatted = SqlFormatter::format($formatted, false);
+		}
+		
+		return $formatted;
 	}
 }
