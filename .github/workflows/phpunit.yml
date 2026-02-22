@@ -6,7 +6,7 @@ on:
       - main
   pull_request:
   schedule:
-    - cron: '0 14 * * 3' # Run Wednesdays at 2pm EST
+    - cron: '0 14 * * 3'
 
 jobs:
   php-tests:
@@ -14,9 +14,9 @@ jobs:
 
     strategy:
       matrix:
-        php: [ 8.1, 8.2, 8.3, 8.4 ]
-        laravel: [ 10.*, 11.*, 12.* ]
-        dependency-version: [ stable, lowest ]
+        php: [8.1, 8.2, 8.3, 8.4]
+        laravel: ['10.*', '11.*', '12.*', '13.*']
+        dependency-version: [stable, lowest]
         exclude:
           - php: 8.1
             laravel: 12.*
@@ -28,9 +28,14 @@ jobs:
             laravel: 12.*
           - php: 8.0
             laravel: 10.*
-    
+          - laravel: 13.*
+            php: 8.1
+          - laravel: 13.*
+            php: 8.2
+
     timeout-minutes: 10
-    name: "${{ matrix.php }} / ${{ matrix.laravel }} (${{ matrix.dependency-version }})"
+
+    name: ${{ matrix.php }} / ${{ matrix.laravel }} (${{ matrix.dependency-version }})
 
     steps:
       - name: Checkout code
