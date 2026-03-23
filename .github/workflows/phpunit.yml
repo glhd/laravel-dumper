@@ -18,6 +18,10 @@ jobs:
         laravel: [ 11.*, 12.*, 13.* ]
         dependency-version: [ stable, lowest ]
         exclude:
+          - php: 8.2
+            laravel: 13.*
+          - php: 8.1
+            laravel: 13.*
           - php: 8.1
             laravel: 12.*
           - php: 8.1
